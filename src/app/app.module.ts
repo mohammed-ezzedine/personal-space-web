@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CategoryService } from './category/category.service';
 import { CommonModule } from '@angular/common';
 import { AdminModule } from './admin/admin.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AdminModule } from './admin/admin.module';
     CommonModule,
     HttpClientModule,
     AdminModule,
+    BrowserAnimationsModule
   ],
   providers: [CategoryService],
   bootstrap: [AppComponent]
