@@ -8,7 +8,11 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { CategoriesDetailsComponent } from './admin-categories-page/categories-details/categories-details.component';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import {MessageModule} from 'primeng/message'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminRoutingModule,
     TableModule,
     ToastModule,
-    // BrowserAnimationsModule
+    InputTextModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    KeyFilterModule,
+    MessageModule
   ],
   providers: [
     CategoryService,

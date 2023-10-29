@@ -1,10 +1,22 @@
 
-<p-table [value]="categorySummaries" (onRowReorder)="updateCategoriesOrder($event)">
-    <ng-template pTemplate="header" let-columns>
+<p-table styleClass="p-datatable" [loading]="fetchingCategoriesLoading" [value]="categorySummaries" (onRowReorder)="updateCategoriesOrder($event)">
+    <ng-template pTemplate="header">
         <tr>
             <th></th>
             <th>Name</th>
             <th>Action</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>
+                <input  id="new-category-name" pInputText [formControl]="categoryCandidateNameInput" 
+                        [pKeyFilter]="categoryNameValidator" placeholder="New Category"/>
+            </th>
+            <th>
+                <p-button label="Create" [loading]="categoryCreationLoading" (onClick)="createNewCategory()" 
+                          [disabled]="!categoryCandidateNameInput.valid"
+                ></p-button>
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-category let-index="rowIndex">

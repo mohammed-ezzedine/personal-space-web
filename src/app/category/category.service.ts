@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http"
 import { environment } from "src/environments/environment.development";
 import { Injectable } from "@angular/core";
 import { CategoryOrder } from "./category-order";
+import { CategoryCreationResponse } from "./category-creation-response";
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,10 @@ export class CategoryService {
     }
 
     updateCategoriesOrder(categoriesOrders: CategoryOrder[]): Observable<void> {
-      return this.http.put<void>(`${this.baseUrl}/orders`, { categoriesOrders: categoriesOrders })
+        return this.http.put<void>(`${this.baseUrl}/orders`, { categoriesOrders: categoriesOrders })
+    }
+
+    createNewCategory(categoryCandidateName: string) {
+        return this.http.post<CategoryCreationResponse>(this.baseUrl, { name: categoryCandidateName })
     }
 }

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { TableRowReorderEvent } from 'primeng/table';
 import { Subject, takeUntil } from 'rxjs';
@@ -15,17 +16,31 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject();
 
+  readonly categoryNameValidator: RegExp = /^[a-zA-Z ]+$/
+
   categorySummaries: Category[] = [];
+
+  categoryCandidateNameInput = new FormControl('', [ Validators.required, Validators.pattern(this.categoryNameValidator)]);
+
+  categoryCreationLoading: boolean = false;
+  fetchingCategoriesLoading: boolean = false;
 
   constructor(private categoryService: CategoryService,
               private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.fetchingCategoriesLoading = true;
     this.categoryService.getCategorySummaries()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: categorySummaries => this.categorySummaries = categorySummaries,
-        error: error => console.error(error)
+        next: categorySummaries => {
+          this.categorySummaries = categorySummaries,
+          this.fetchingCategoriesLoading = false;
+        },
+        error: () => {
+          this.showErrorMessage("Failed to fetch the categories details.")
+          this.fetchingCategoriesLoading = false;
+        }
       })
   }
 
@@ -55,8 +70,39 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
 
     this.categoryService.updateCategoriesOrder(this.categorySummaries.map(c => <CategoryOrder>{ categoryId: c.id, categoryOrder: c.order }))
     .subscribe({
-      next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: "categories orders is updated"}),
-      error: e => console.error("failed to update the categories orders", e)
+      next: () => this.showSuccessMessage("Categories orders is updated"),
+      error: e => this.showErrorMessage("Failed to update the categories orders")
     })
+  }
+
+  private showSuccessMessage(message: string): void {
+    return this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  private showErrorMessage(message: string): void {
+    return this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
+  createNewCategory() {
+    if (this.categoryCandidateNameInput.valid) {
+      this.categoryCreationLoading = true;
+      this.categoryService.createNewCategory(this.categoryCandidateNameInput.value!)
+        .subscribe({
+          next: result => {
+            this.categorySummaries.push({
+              id: result.id,
+              name: this.categoryCandidateNameInput.value!,
+              order: result.order,
+              canBeDeleted: true
+            })
+            this.showSuccessMessage("Category is created.")
+            this.categoryCreationLoading = false;
+          },
+          error: e => {
+            this.categoryCreationLoading = false;
+            this.showErrorMessage("Failed to create the new category")
+          }
+        })
+    }
   }
 }
