@@ -13,11 +13,22 @@ import { ButtonModule } from 'primeng/button';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import {MessageModule} from 'primeng/message'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminArticlesPageComponent } from './admin-articles-page/admin-articles-page.component';
+import { AdminCreateArticlePageComponent } from './admin-articles-page/admin-create-article-page/admin-create-article-page.component';
+import { CategoriesDropdownComponent } from './admin-articles-page/categories-dropdown/categories-dropdown.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { EditorModule } from 'primeng/editor';
+import { ArticleService } from '../article/article-service';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { LoaderModule } from '../components/loader/loader.module';
 
 @NgModule({
   declarations: [
     AdminCategoriesPageComponent,
-    CategoriesDetailsComponent
+    CategoriesDetailsComponent,
+    AdminArticlesPageComponent,
+    AdminCreateArticlePageComponent,
+    CategoriesDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -29,11 +40,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     ButtonModule,
     KeyFilterModule,
-    MessageModule
+    MessageModule,
+    DropdownModule,
+    EditorModule,
+    LoaderModule
   ],
   providers: [
     CategoryService,
-    MessageService
+    MessageService,
+    ArticleService
   ]
 })
 export class AdminModule { }

@@ -97,6 +97,7 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
             })
             this.showSuccessMessage("Category is created.")
             this.categoryCreationLoading = false;
+            this.categoryCandidateNameInput.setValue('')
           },
           error: e => {
             this.categoryCreationLoading = false;

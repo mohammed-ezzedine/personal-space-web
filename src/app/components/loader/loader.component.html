@@ -1,0 +1,8 @@
+<ng-template [ngIf]="loading" [ngIfElse]="showContent">
+    <p-progressSpinner [style]="{ width: '100%' }"></p-progressSpinner>
+
+</ng-template>
+
+<ng-template #showContent>
+    <ng-content></ng-content>
+</ng-template>

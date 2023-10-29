@@ -1,0 +1,23 @@
+<app-loader [loading]="loadingArticleCreation">
+    <form [formGroup]="form" class="new-article-form" *ngIf="!loadingArticleCreation">
+        <span class="p-float-label article-property-input">
+            <input pInputText id="title" formControlName="title" />
+            <label htmlFor="title">Title</label>
+        </span>
+        <span class="p-float-label article-property-input">
+            <input pInputText id="description" formControlName="description" />
+            <label htmlFor="description">Description</label>
+        </span>
+        
+        <div class="article-property-input">
+            <app-categories-dropdown [form]="form"></app-categories-dropdown>
+        </div>
+    
+        <div class="article-property-input">
+            <p-editor formControlName="content" [style]="{ minHeight: '320px' }"></p-editor>
+        </div>
+        
+    
+        <p-button label="Submit" (onClick)="createArticle()"></p-button>
+    </form>
+</app-loader>

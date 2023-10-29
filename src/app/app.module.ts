@@ -8,10 +8,13 @@ import { CategoryService } from './category/category.service';
 import { CommonModule } from '@angular/common';
 import { AdminModule } from './admin/admin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoaderComponent } from './components/loader/loader.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
     AppComponent,
+    // LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,9 +22,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     HttpClientModule,
     AdminModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ProgressSpinnerModule
   ],
   providers: [CategoryService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
