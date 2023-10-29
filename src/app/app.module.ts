@@ -10,11 +10,15 @@ import { AdminModule } from './admin/admin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ArticlePageComponent } from './article/article-page/article-page.component';
+import { LoaderModule } from './components/loader/loader.module';
+import { ArticleContentComponent } from './article/article-page/article-content/article-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // LoaderComponent,
+    ArticlePageComponent,
+    ArticleContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     HttpClientModule,
     AdminModule,
     BrowserAnimationsModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    LoaderModule
   ],
   providers: [CategoryService],
   bootstrap: [AppComponent],

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subject, catchError, takeUntil } from 'rxjs';
 import { ArticleService } from 'src/app/article/article-service';
@@ -22,7 +23,10 @@ export class AdminCreateArticlePageComponent implements OnInit, OnDestroy {
     content: ['', [Validators.required]]
   });
 
-  constructor(private formBuilder: FormBuilder, private articleService: ArticleService, private messageService: MessageService) { }
+  constructor(private formBuilder: FormBuilder, 
+              private articleService: ArticleService, 
+              private messageService: MessageService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -40,7 +44,7 @@ export class AdminCreateArticlePageComponent implements OnInit, OnDestroy {
         .subscribe({
           next: response => {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Article created successfully'})
-            // TODO go to the article page
+            this.router.navigate(['articles', response.id])
             this.loadingArticleCreation = false;
           },
           error: error => {
