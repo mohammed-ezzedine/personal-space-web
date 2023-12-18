@@ -1,0 +1,9 @@
+.ql-syntax {
+   white-space: pre-line !important;
+}
+
+pre {
+   padding: 10px;
+   border: 1px solid var(--surface-300) !important;
+   border-radius: var(--border-radius);
+}

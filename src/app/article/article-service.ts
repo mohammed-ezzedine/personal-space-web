@@ -9,13 +9,13 @@ import { Article } from "./article";
 @Injectable()
 export class ArticleService {
     private readonly baseUrl = `${environment.serverBaseUrl}/api/articles`;
-
+    
     constructor(private http: HttpClient) { }
-
+    
     createArticle(request: CreateArticleRequest): Observable<ArticleCreationResponse> {
         return this.http.post<ArticleCreationResponse>(this.baseUrl, request);
     }
-
+    
     getArticle(id: string): Observable<Article> {
         return this.http.get<Article>(`${this.baseUrl}/${id}`);
     }
