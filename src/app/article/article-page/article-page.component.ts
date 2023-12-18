@@ -4,6 +4,7 @@ import { Subject, concatMap, map, takeUntil } from 'rxjs';
 import { ArticleService } from '../article-service';
 import { Article } from '../article';
 import { MessageService } from 'primeng/api';
+import { SeoService } from 'src/app/services/seo/seo.service';
 
 @Component({
   selector: 'app-article-page',
@@ -19,7 +20,10 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
 
   loadingFetchingArticle: boolean = false;
 
-  constructor(private route: ActivatedRoute, private articleService: ArticleService, private messageService : MessageService) { }
+  constructor(private route: ActivatedRoute, 
+    private articleService: ArticleService, 
+    private messageService : MessageService,
+    private seoService: SeoService) { }
 
   ngOnInit(): void {
     this.loadingFetchingArticle = true;
@@ -35,6 +39,7 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
         next: article => {
           this.article = article;
           this.loadingFetchingArticle = false;
+          this.seoService.setMetadata({ title: article.title, description: article.description })
         },
         error: () => {
           this.loadingFetchingArticle = false;
