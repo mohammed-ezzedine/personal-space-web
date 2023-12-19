@@ -77,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "personal-space-web:build:production"
+              "buildTarget": "personal-space-web:build:production"
             },
             "development": {
-              "browserTarget": "personal-space-web:build:development"
+              "buildTarget": "personal-space-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "personal-space-web:build"
+            "buildTarget": "personal-space-web:build"
           }
         },
         "test": {
