@@ -2,13 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { CreateArticleRequest } from "./create-article-request";
-import { environment } from "src/environments/environment.development";
+import { environment } from "src/environments/environment";
 import { ArticleCreationResponse } from "./article-creation-response";
 import { Article } from "./article";
 
 @Injectable()
 export class ArticleService {
-    private readonly baseUrl = `${environment.serverBaseUrl}/api/articles`;
+    private readonly baseUrl = `${environment.serverBaseUrl}/articles`;
     
     constructor(private http: HttpClient) { }
     

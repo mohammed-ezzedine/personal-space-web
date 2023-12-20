@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import { Category } from "./category";
 import { HttpClient } from "@angular/common/http"
-import { environment } from "src/environments/environment.development";
+import { environment } from "src/environments/environment";
 import { Injectable } from "@angular/core";
 import { CategoryOrder } from "./category-order";
 import { CategoryCreationResponse } from "./category-creation-response";
@@ -11,7 +11,7 @@ import { CategoryCreationResponse } from "./category-creation-response";
 })
 export class CategoryService {
 
-    private readonly baseUrl = `${environment.serverBaseUrl}/api/categories`;
+    private readonly baseUrl = `${environment.serverBaseUrl}/categories`;
 
     constructor(private http: HttpClient) { }
 
