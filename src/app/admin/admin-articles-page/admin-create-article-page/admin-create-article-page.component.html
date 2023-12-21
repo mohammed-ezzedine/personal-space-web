@@ -12,70 +12,8 @@
         <div class="article-property-input">
             <app-categories-dropdown [form]="form"></app-categories-dropdown>
         </div>
-    
-        <div class="article-property-input">
-            <p-editor formControlName="content" [style]="{ minHeight: '320px' }">
-                <ng-template pTemplate="header">
-                    <span class="ql-formats">
-                        <select class="ql-header" >
-                            <option value="1" label="H1"></option>
-                            <option value="2" label="H2"></option>
-                            <option value="3" label="H3"></option>
-                            <option value="4" label="H4"></option>
-                            <option value="5" label="H5"></option>
-                            <option value="6" label="H6"></option>
-                            <option selected></option>
-                        </select>  
-                        <select class="ql-font">
-                            <option selected>Sans Serif</option>
-                            <option value="serif">Serif</option>
-                            <option value="monospace">Monospace</option>
-                        </select>
-                    </span>
-                    <span class="ql-formats">
-                        <button class="ql-bold" aria-label="Bold"></button>
-                        <button class="ql-italic" aria-label="Italic"></button>
-                        <button class="ql-underline" aria-label="Underline"></button>
-                        <button class="ql-strike" aria-label="Strike"></button>
-                    </span>
-                    <span class="ql-formats">
-                        <select title="Text Color" class="ql-color" defaultValue="rgb(0, 0, 0)"></select>
-                        <select title="Background Color" class="ql-background" defaultValue="rgb(255, 255, 255)"></select>
-                    </span>
-                    <span class="ql-formats">
-                        <button class="ql-list" value="ordered"></button>
-                        <button class="ql-list" value="bullet"></button>
-                        <select title="Text Alignment" class="ql-align" >
-                          <option selected></option>
-                          <option value="center" label="Center"></option>
-                          <option value="right" label="Right"></option>
-                          <option value="justify" label="Justify"></option>
-                        </select>            
-                        <span class="ql-format-separator"></span>
-                    </span> 
-                    <span class="ql-formats">
-                        <button aria-label="Link" class="ql-link"></button>
-                        <button aria-label="Image" class="ql-image"></button>
-                    </span>
-                    <span class="ql-formats">
-                        <button type="button" class="ql-script" value="sub"></button>
-                        <button type="button" class="ql-script" value="super"></button>
 
-                        <button type="button" class="ql-indent" value="+1"></button>
-                        <button type="button" class="ql-indent" value="-1"></button>  
-                       
-                        <button type="button" class="ql-header" aria-label="1"></button>
-                        <button type="button" class="ql-blockquote" aria-label="BlockQuote"></button>
-                        <button type="button" class="ql-code-block" aria-label="Code Block"></button>
-                    </span>
-                    <span class="ql-formats">
-                        <button class="ql-clean" aria-label="Remove Styles" type="button"></button>
-                    </span>
-    
-                </ng-template>
-            </p-editor>
-        </div>
-        
+        <app-rich-text-editor formControlName="content"></app-rich-text-editor>
     
         <p-button label="Submit" (onClick)="createArticle()"></p-button>
     </form>

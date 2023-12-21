@@ -7,7 +7,6 @@ import { ToastModule } from 'primeng/toast';
 import { AdminRoutingModule } from './admin-routing.module';
 import { CategoriesDetailsComponent } from './admin-categories-page/categories-details/categories-details.component';
 import { MessageService } from 'primeng/api';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { KeyFilterModule } from 'primeng/keyfilter';
@@ -17,10 +16,9 @@ import { AdminArticlesPageComponent } from './admin-articles-page/admin-articles
 import { AdminCreateArticlePageComponent } from './admin-articles-page/admin-create-article-page/admin-create-article-page.component';
 import { CategoriesDropdownComponent } from './admin-articles-page/categories-dropdown/categories-dropdown.component';
 import { DropdownModule } from 'primeng/dropdown';
-import { EditorModule } from 'primeng/editor';
 import { ArticleService } from '../article/article-service';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LoaderModule } from '../components/loader/loader.module';
+import { RichTextEditorComponent } from '../components/rich-text-editor/rich-text-editor.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +40,8 @@ import { LoaderModule } from '../components/loader/loader.module';
     KeyFilterModule,
     MessageModule,
     DropdownModule,
-    EditorModule,
-    LoaderModule
+    LoaderModule,
+    RichTextEditorComponent
   ],
   providers: [
     CategoryService,
