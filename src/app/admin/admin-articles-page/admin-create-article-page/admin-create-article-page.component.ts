@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Subject, catchError, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { ArticleService } from 'src/app/article/article-service';
 
 @Component({
