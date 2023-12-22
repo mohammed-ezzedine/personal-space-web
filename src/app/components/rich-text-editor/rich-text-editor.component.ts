@@ -1,13 +1,11 @@
-import { Component, Input, forwardRef } from '@angular/core';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
-import * as Editor from 'ckeditor-custom-build'
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CkeditorAdapterComponent } from './ckeditor-adapter/ckeditor-adapter.component';
 
 @Component({
   selector: 'app-rich-text-editor',
   standalone: true,
-  imports: [CKEditorModule],
+  imports: [CkeditorAdapterComponent],
   templateUrl: './rich-text-editor.component.html',
   styleUrl: './rich-text-editor.component.scss',
   providers: [{
@@ -18,31 +16,18 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 })
 export class RichTextEditorComponent implements ControlValueAccessor {
 
-  @Input()
-  formControl!: FormControl;
-
-  editor = Editor.default.Editor;
-
-  value: string  = '';
-
-  onChange = (value: any) => { };
-
-  updateContent(event: any) {
-    this.onChange(event.editor.getData())
-  }
+  onChange: (value: any) => void = (_value: any) => { };
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
-    
+  registerOnTouched(_fn: any): void {  
   }
   
-  setDisabledState?(isDisabled: boolean): void {
-    
+  setDisabledState?(_isDisabled: boolean): void {
   }
 
-  writeValue(obj: string): void {
+  writeValue(_obj: string): void {
   }
 }

@@ -1,16 +1,18 @@
 FROM node:20.10.0-alpine AS build
 RUN mkdir -p /app
 WORKDIR /app
+
 COPY package*.json /app/
 RUN npm install
+
 COPY . /app/
 RUN npm run build --workspace=src/packages/ckeditor
-RUN npm run build
+RUN npm run prod:ssr
 
-FROM nginx:alpine
+FROM node:20-slim
 
-RUN rm -rf /usr/share/nginx/html/* && rm -rf /etc/nginx/conf.d/default.conf
-COPY ./default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist/personal-space-web /usr/share/nginx/html
+COPY --from=build /app/dist/personal-space-web/ dist/personal-space-web/
 
-EXPOSE 80
+CMD ["node", "dist/personal-space-web/server/main.js"]
+
+EXPOSE 4000
