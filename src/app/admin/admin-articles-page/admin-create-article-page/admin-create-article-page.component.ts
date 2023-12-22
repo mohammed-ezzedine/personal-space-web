@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -26,7 +27,8 @@ export class AdminCreateArticlePageComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder, 
               private articleService: ArticleService, 
               private messageService: MessageService,
-              private router: Router) { }
+              private router: Router,
+              @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
   }
@@ -34,6 +36,10 @@ export class AdminCreateArticlePageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next({});
     this.destroy$.complete();
+  }
+
+  shouldRenderForm() {
+    return isPlatformBrowser(this.platformId) && !this.loadingArticleCreation;
   }
 
   createArticle() {

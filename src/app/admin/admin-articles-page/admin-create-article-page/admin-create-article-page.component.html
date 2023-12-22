@@ -1,5 +1,5 @@
 <app-loader [loading]="loadingArticleCreation">
-    <form [formGroup]="form" class="new-article-form" *ngIf="!loadingArticleCreation">
+    <form [formGroup]="form" class="new-article-form" *ngIf="shouldRenderForm()">
         <span class="p-float-label article-property-input">
             <input pInputText id="title" formControlName="title" />
             <label htmlFor="title">Title</label>
