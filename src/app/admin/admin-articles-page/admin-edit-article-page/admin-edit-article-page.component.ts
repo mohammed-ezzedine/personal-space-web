@@ -22,6 +22,7 @@ export class AdminEditArticlePageComponent implements OnInit, OnDestroy {
     title: ['', [Validators.required]],
     description: ['', [Validators.required]],
     categoryId: ['', [Validators.required]],
+    thumbnailImageUrl: [null],
     content: ['', [Validators.required]]
   });
 
@@ -48,6 +49,7 @@ export class AdminEditArticlePageComponent implements OnInit, OnDestroy {
           'title': data.title,
           'description': data.description,
           'categoryId': data.categoryId,
+          'thumbnailImageUrl': data.thumbnailImageUrl,
           'content': data.content
         })
 

@@ -2,6 +2,7 @@
     <div>
         <h1>{{article?.title}}</h1>
         <h4>{{article?.description}}</h4>
+        <p-image *ngIf="article?.thumbnailImageUrl" [src]="article?.thumbnailImageUrl" class="flex justify-content-center"></p-image>
         <app-article-content [content]="article?.content"></app-article-content>
     </div>
 </app-loader>

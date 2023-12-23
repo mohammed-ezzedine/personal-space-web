@@ -34,7 +34,8 @@
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "primeicons/primeicons.css",
-              "node_modules/highlight.js/styles/atom-one-light.min.css"
+              "node_modules/highlight.js/styles/atom-one-light.min.css",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": [ ]
           },

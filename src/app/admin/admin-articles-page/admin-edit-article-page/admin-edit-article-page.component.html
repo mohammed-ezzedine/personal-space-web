@@ -8,6 +8,11 @@
             <input pInputText id="description" formControlName="description" />
             <label htmlFor="description">Description</label>
         </span>
+        <span class="p-float-label article-property-input">
+            <input pInputText id="thumbnailImageUrl" formControlName="thumbnailImageUrl" />
+            <label htmlFor="thumbnailImageUrl">Thumbnail Image URL</label>
+        </span>
+        <p-image *ngIf="form.get('thumbnailImageUrl')?.value" [src]="form.get('thumbnailImageUrl')?.value" class="flex justify-content-center"></p-image>
         
         <div class="article-property-input">
             <app-categories-dropdown [form]="form"></app-categories-dropdown>

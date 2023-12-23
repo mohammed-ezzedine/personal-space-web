@@ -4,4 +4,5 @@ export interface Article {
     description: string;
     content: string;
     categoryId: string;
+    thumbnailImageUrl?: string;
 }

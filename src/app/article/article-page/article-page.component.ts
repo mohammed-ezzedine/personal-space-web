@@ -56,7 +56,7 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
         next: article => {
           this.article = article;
           this.loadingFetchingArticle = false;
-          this.seoService.setMetadata({ title: article.title, description: article.description })
+          this.seoService.setMetadata({ title: article.title, description: article.description, imageUrl: article.thumbnailImageUrl })
 
           this.storeArticleInServerData();
         },
@@ -67,11 +67,6 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
         }
       })
   }
-
-  go() {
-    this.router.navigate(['articles', '60c96392-1347-474e-9c59-1952091f5672'])
-  }
-
   private readArticleFromServerData() {
     this.article = this.transferState.get<Article | undefined>(this.SERVER_DATA_KEY, undefined)
     this.transferState.remove(this.SERVER_DATA_KEY);

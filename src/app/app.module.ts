@@ -12,6 +12,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ArticlePageComponent } from './article/article-page/article-page.component';
 import { LoaderModule } from './components/loader/loader.module';
 import { ArticleContentComponent } from './article/article-page/article-content/article-content.component';
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ArticleContentComponent } from './article/article-page/article-content/
     HttpClientModule,
     AdminModule,
     BrowserAnimationsModule,
+    ImageModule,
     ProgressSpinnerModule,
     LoaderModule
   ],

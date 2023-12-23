@@ -21,6 +21,7 @@ export class AdminCreateArticlePageComponent implements OnInit, OnDestroy {
     title: ['', [Validators.required]],
     description: ['', [Validators.required]],
     categoryId: ['', [Validators.required]],
+    thumbnailImageUrl: [null],
     content: ['', [Validators.required]]
   });
 
