@@ -14,6 +14,7 @@ import { ImageModule } from 'primeng/image';
 import { ChipsModule } from 'primeng/chips';
 import { DataViewModule } from 'primeng/dataview';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { PaginatorModule } from 'primeng/paginator';
 import {MessageModule} from 'primeng/message'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminArticlesPageComponent } from './admin-articles-page/admin-articles-page.component';
@@ -53,7 +54,8 @@ import { AdminArticlesSummaryComponent } from './admin-articles-page/admin-artic
     RichTextEditorComponent,
     ImageModule,
     ChipsModule,
-    DataViewModule
+    DataViewModule,
+    PaginatorModule
   ],
   providers: [
     CategoryService,

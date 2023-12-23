@@ -1,4 +1,4 @@
-<p-dataView #dv [value]="articles">
+<p-dataView [value]="articles">
     <ng-template pTemplate="list" let-articles>
         <div class="grid grid-nogutter">
             <div class="col-12" *ngFor="let article of articles; let first = first">
@@ -26,3 +26,6 @@
         </div>
     </ng-template>
 </p-dataView>
+<p-paginator (onPageChange)="onPageChange($event)" [first]="pageIndex * pageSize" [rows]="pageSize" [totalRecords]="numberOfArticles"
+    [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"
+></p-paginator>
