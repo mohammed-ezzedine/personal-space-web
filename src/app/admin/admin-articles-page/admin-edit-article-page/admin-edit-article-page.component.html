@@ -21,6 +21,10 @@
         <div class="article-content-editor">
             <app-rich-text-editor formControlName="content"></app-rich-text-editor>
         </div>
+
+        <div class="flex w-100 article-property-input">
+            <p-chips formControlName="keywords" placeholder="Keywords" class="flex w-100"></p-chips>
+        </div>
     
         <p-button label="Submit" (onClick)="submit()"></p-button>
     </form>

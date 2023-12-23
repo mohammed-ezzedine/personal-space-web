@@ -23,7 +23,8 @@ export class AdminEditArticlePageComponent implements OnInit, OnDestroy {
     description: ['', [Validators.required]],
     categoryId: ['', [Validators.required]],
     thumbnailImageUrl: [null],
-    content: ['', [Validators.required]]
+    content: ['', [Validators.required]],
+    keywords: [[]]
   });
 
   articleId: string = '';
@@ -50,7 +51,8 @@ export class AdminEditArticlePageComponent implements OnInit, OnDestroy {
           'description': data.description,
           'categoryId': data.categoryId,
           'thumbnailImageUrl': data.thumbnailImageUrl,
-          'content': data.content
+          'content': data.content,
+          'keywords': data.keywords
         })
 
         this.loading = false;

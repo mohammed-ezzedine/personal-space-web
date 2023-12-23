@@ -13,6 +13,7 @@ import { ArticlePageComponent } from './article/article-page/article-page.compon
 import { LoaderModule } from './components/loader/loader.module';
 import { ArticleContentComponent } from './article/article-page/article-content/article-content.component';
 import { ImageModule } from 'primeng/image';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ImageModule } from 'primeng/image';
     AdminModule,
     BrowserAnimationsModule,
     ImageModule,
+    ChipModule,
     ProgressSpinnerModule,
     LoaderModule
   ],

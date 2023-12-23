@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
+import { ChipsModule } from 'primeng/chips';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import {MessageModule} from 'primeng/message'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -45,7 +46,8 @@ import { AdminEditArticlePageComponent } from './admin-articles-page/admin-edit-
     DropdownModule,
     LoaderModule,
     RichTextEditorComponent,
-    ImageModule
+    ImageModule,
+    ChipsModule
   ],
   providers: [
     CategoryService,

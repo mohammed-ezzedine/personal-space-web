@@ -28,7 +28,6 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
     private messageService : MessageService,
     private seoService: SeoService,
     private transferState: TransferState,
-    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
@@ -56,7 +55,7 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
         next: article => {
           this.article = article;
           this.loadingFetchingArticle = false;
-          this.seoService.setMetadata({ title: article.title, description: article.description, imageUrl: article.thumbnailImageUrl })
+          this.seoService.setMetadata({ title: article.title, description: article.description, imageUrl: article.thumbnailImageUrl, keywords: article.keywords })
 
           this.storeArticleInServerData();
         },

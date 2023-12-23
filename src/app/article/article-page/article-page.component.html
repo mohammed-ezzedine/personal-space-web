@@ -4,5 +4,8 @@
         <h4>{{article?.description}}</h4>
         <p-image *ngIf="article?.thumbnailImageUrl" [src]="article?.thumbnailImageUrl" class="flex justify-content-center"></p-image>
         <app-article-content [content]="article?.content"></app-article-content>
+        <div class="keywords">
+            <p-chip *ngFor="let keyword of article?.keywords" [label]="keyword"></p-chip>
+        </div>
     </div>
 </app-loader>

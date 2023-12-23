@@ -5,6 +5,7 @@ export interface SeoMetadata {
     title: string;
     description: string;
     imageUrl?: string;
+    keywords?: string[]
 }
 
 @Injectable({
@@ -18,9 +19,15 @@ export class SeoService {
         this.setDescription(metada.description);
 
         this.setImage(metada);
-
+        this.setKeywords(metada);
     }
     
+    private setKeywords(metada: SeoMetadata) {
+        if (metada.keywords) {
+            this.metaService.addTag({ name: "keywords", content: metada.keywords.reduce((k1, k2) => `${k1}, ${k2}`) });
+        }
+    }
+
     private setImage(metada: SeoMetadata) {
         if (metada.imageUrl) {
             this.metaService.addTag({ 'name': 'image', 'property': 'og:image', 'content': metada.imageUrl });
