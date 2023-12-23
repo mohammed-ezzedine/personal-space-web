@@ -8,7 +8,6 @@ import { CategoryService } from './category/category.service';
 import { CommonModule } from '@angular/common';
 import { AdminModule } from './admin/admin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoaderComponent } from './components/loader/loader.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ArticlePageComponent } from './article/article-page/article-page.component';
 import { LoaderModule } from './components/loader/loader.module';

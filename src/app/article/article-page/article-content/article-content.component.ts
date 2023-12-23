@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, Inject, Input, OnChanges, PLATFORM_ID, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import hljs from 'highlight.js';
 
 @Component({
@@ -15,12 +16,16 @@ export class ArticleContentComponent implements OnChanges {
   @ViewChild('content', { static: true })
   contentDiv!: ElementRef;
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.contentDiv.nativeElement.innerHTML = this.content;
 
-    let elements = this.contentDiv.nativeElement.getElementsByTagName("pre")
-    for (let element of elements) {
-      hljs.highlightElement(element);
+    if (isPlatformBrowser(this.platformId)) {
+      let elements = this.contentDiv.nativeElement.getElementsByTagName("pre")
+      for (let element of elements) {
+        hljs.highlightElement(element);
+      }
     }
   }
 }
