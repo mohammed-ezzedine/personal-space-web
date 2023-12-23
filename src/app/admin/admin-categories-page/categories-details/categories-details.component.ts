@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TransferState, makeStateKey } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { TableRowReorderEvent } from 'primeng/table';
@@ -16,6 +17,8 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject();
 
+  private readonly SERVER_DATA_KEY = makeStateKey<Category[]>("categoriesData");
+
   readonly categoryNameValidator: RegExp = /^[a-zA-Z ]+$/
 
   categorySummaries: Category[] = [];
@@ -26,9 +29,19 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
   fetchingCategoriesLoading: boolean = false;
 
   constructor(private categoryService: CategoryService,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private transferState: TransferState,
+              @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      if (this.transferState.hasKey(this.SERVER_DATA_KEY)) {
+        this.categorySummaries = this.transferState.get<Category[]>(this.SERVER_DATA_KEY, []);
+        this.transferState.remove(this.SERVER_DATA_KEY);
+        return;
+      }
+    }
+
     this.fetchingCategoriesLoading = true;
     this.categoryService.getCategorySummaries()
       .pipe(takeUntil(this.destroy$))
@@ -36,6 +49,10 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
         next: categorySummaries => {
           this.categorySummaries = categorySummaries,
           this.fetchingCategoriesLoading = false;
+
+          if (isPlatformServer(this.platformId)) {
+            this.transferState.set(this.SERVER_DATA_KEY, categorySummaries);
+          }
         },
         error: () => {
           this.showErrorMessage("Failed to fetch the categories details.")
