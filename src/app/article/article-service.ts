@@ -7,6 +7,7 @@ import { ArticleCreationResponse } from "./article-creation-response";
 import { Article } from "./article";
 import { isPlatformServer } from "@angular/common";
 import { SERVER_URL } from "../tokens";
+import { EditArticleRequest } from "./edit-article-request";
 
 @Injectable()
 export class ArticleService {
@@ -14,15 +15,19 @@ export class ArticleService {
                 @Inject(PLATFORM_ID) private platformId: Object,
                 @Optional() @Inject(SERVER_URL) private serverUrl: string) { }
     
-    createArticle(request: CreateArticleRequest): Observable<ArticleCreationResponse> {
-        return this.http.post<ArticleCreationResponse>(this.getBaseUrl(), request);
-    }
-    
     getArticle(id: string): Observable<Article> {
         return this.http.get<Article>(`${this.getBaseUrl()}/${id}`);
     }
+    
+    createArticle(request: CreateArticleRequest): Observable<ArticleCreationResponse> {
+        return this.http.post<ArticleCreationResponse>(this.getBaseUrl(), request);
+    }
 
-    getBaseUrl() {
+    editarticle(id: string, request: EditArticleRequest): Observable<void> {
+        return this.http.put<void>(`${this.getBaseUrl()}/${id}`, request)
+    }
+
+    private getBaseUrl() {
         let serverUrl = isPlatformServer(this.platformId)? this.serverUrl : environment.serverBaseUrl;
         return `${serverUrl}/articles`;
     }

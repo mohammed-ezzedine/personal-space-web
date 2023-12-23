@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CkeditorAdapterComponent } from './ckeditor-adapter/ckeditor-adapter.component';
 
@@ -16,6 +16,8 @@ import { CkeditorAdapterComponent } from './ckeditor-adapter/ckeditor-adapter.co
 })
 export class RichTextEditorComponent implements ControlValueAccessor {
 
+  data: string = ''
+
   onChange: (value: any) => void = (_value: any) => { };
 
   registerOnChange(fn: any): void {
@@ -29,5 +31,6 @@ export class RichTextEditorComponent implements ControlValueAccessor {
   }
 
   writeValue(_obj: string): void {
+    this.data = _obj;
   }
 }

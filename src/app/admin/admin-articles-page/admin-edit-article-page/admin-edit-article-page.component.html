@@ -1,5 +1,5 @@
-<app-loader [loading]="loadingArticleCreation">
-    <form [formGroup]="form" class="new-article-form" *ngIf="shouldRenderForm()">
+<app-loader [loading]="loading">
+    <form [formGroup]="form" class="edit-article-form" *ngIf="shouldRenderForm()">
         <span class="p-float-label article-property-input">
             <input pInputText id="title" formControlName="title" />
             <label htmlFor="title">Title</label>
@@ -17,6 +17,6 @@
             <app-rich-text-editor formControlName="content"></app-rich-text-editor>
         </div>
     
-        <p-button label="Submit" (onClick)="createArticle()"></p-button>
+        <p-button label="Submit" (onClick)="submit()"></p-button>
     </form>
 </app-loader>

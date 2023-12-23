@@ -19,6 +19,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ArticleService } from '../article/article-service';
 import { LoaderModule } from '../components/loader/loader.module';
 import { RichTextEditorComponent } from '../components/rich-text-editor/rich-text-editor.component';
+import { AdminEditArticlePageComponent } from './admin-articles-page/admin-edit-article-page/admin-edit-article-page.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RichTextEditorComponent } from '../components/rich-text-editor/rich-tex
     CategoriesDetailsComponent,
     AdminArticlesPageComponent,
     AdminCreateArticlePageComponent,
+    AdminEditArticlePageComponent,
     CategoriesDropdownComponent,
   ],
   imports: [

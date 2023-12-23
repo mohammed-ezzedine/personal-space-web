@@ -11,6 +11,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 export class CkeditorAdapterComponent {
 
   @Input()
+  data: string = '';
+
+  @Input()
   onChange: (value: any) => void = (_value: any) => { };
 
   constructor(private renderer: Renderer2) {
@@ -26,6 +29,8 @@ export class CkeditorAdapterComponent {
             editorHtmlElement.model.document.on('change:data', (_event, _data) => {
               this.onChange(editorHtmlElement.getData())
             })
+
+            editorHtmlElement.data.set(this.data);
           });
 
       })
