@@ -21,6 +21,10 @@ export class CategoryService {
         return this.http.get<Category[]>(this.getBaseUrl())
     }
 
+    getCategoryDetails(id: string): Observable<Category> {
+        return this.http.get<Category>(`${this.getBaseUrl()}/${id}`);
+    }
+
     updateCategoriesOrder(categoriesOrders: CategoryOrder[]): Observable<void> {
         return this.http.put<void>(`${this.getBaseUrl()}/orders`, { categoriesOrders: categoriesOrders })
     }
