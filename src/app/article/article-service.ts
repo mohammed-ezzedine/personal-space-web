@@ -8,12 +8,17 @@ import { Article } from "./article";
 import { isPlatformServer } from "@angular/common";
 import { SERVER_URL } from "../tokens";
 import { EditArticleRequest } from "./edit-article-request";
+import { ArticleSummary } from "./article-summary";
 
 @Injectable()
 export class ArticleService {
     constructor(private http: HttpClient, 
                 @Inject(PLATFORM_ID) private platformId: Object,
                 @Optional() @Inject(SERVER_URL) private serverUrl: string) { }
+
+    getArticlesSummary(): Observable<ArticleSummary[]> {
+        return this.http.get<ArticleSummary[]>(this.getBaseUrl());
+    }
     
     getArticle(id: string): Observable<Article> {
         return this.http.get<Article>(`${this.getBaseUrl()}/${id}`);

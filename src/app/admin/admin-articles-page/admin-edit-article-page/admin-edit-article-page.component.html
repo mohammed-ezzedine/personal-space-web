@@ -5,7 +5,7 @@
             <label htmlFor="title">Title</label>
         </span>
         <span class="p-float-label article-property-input">
-            <input pInputText id="description" formControlName="description" />
+            <textarea pInputTextarea rows="5" pInputText id="description" formControlName="description" [autoResize]="true" class="w-full"></textarea>
             <label htmlFor="description">Description</label>
         </span>
         <span class="p-float-label article-property-input">

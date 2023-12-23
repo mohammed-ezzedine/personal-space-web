@@ -8,9 +8,11 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { CategoriesDetailsComponent } from './admin-categories-page/categories-details/categories-details.component';
 import { MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule  } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
 import { ChipsModule } from 'primeng/chips';
+import { DataViewModule } from 'primeng/dataview';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import {MessageModule} from 'primeng/message'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +24,7 @@ import { ArticleService } from '../article/article-service';
 import { LoaderModule } from '../components/loader/loader.module';
 import { RichTextEditorComponent } from '../components/rich-text-editor/rich-text-editor.component';
 import { AdminEditArticlePageComponent } from './admin-articles-page/admin-edit-article-page/admin-edit-article-page.component';
+import { AdminArticlesSummaryComponent } from './admin-articles-page/admin-articles-summary/admin-articles-summary.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import { AdminEditArticlePageComponent } from './admin-articles-page/admin-edit-
     AdminCreateArticlePageComponent,
     AdminEditArticlePageComponent,
     CategoriesDropdownComponent,
+    AdminArticlesSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +42,7 @@ import { AdminEditArticlePageComponent } from './admin-articles-page/admin-edit-
     TableModule,
     ToastModule,
     InputTextModule,
+    InputTextareaModule,
     FormsModule,
     ReactiveFormsModule,
     ButtonModule,
@@ -47,7 +52,8 @@ import { AdminEditArticlePageComponent } from './admin-articles-page/admin-edit-
     LoaderModule,
     RichTextEditorComponent,
     ImageModule,
-    ChipsModule
+    ChipsModule,
+    DataViewModule
   ],
   providers: [
     CategoryService,
