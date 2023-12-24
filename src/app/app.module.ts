@@ -14,6 +14,7 @@ import { LoaderModule } from './components/loader/loader.module';
 import { ArticleContentComponent } from './article/article-page/article-content/article-content.component';
 import { ImageModule } from 'primeng/image';
 import { ChipModule } from 'primeng/chip';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ChipModule } from 'primeng/chip';
     ImageModule,
     ChipModule,
     ProgressSpinnerModule,
-    LoaderModule
+    LoaderModule,
+    DividerModule
   ],
   providers: [CategoryService, provideClientHydration()],
   bootstrap: [AppComponent],

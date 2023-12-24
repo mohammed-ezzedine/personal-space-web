@@ -1,10 +1,11 @@
 <app-loader [loading]="loadingFetchingArticle">
     <div>
         <h1>{{article?.title}}</h1>
-        <h4>{{article?.description}}</h4>
+        <div *ngIf="article?.createdDate" class="text-xs text-color-secondary">Published {{ article?.createdDate | date }}</div>
+        <div class="text-lg font-medium text-justify mt-3">{{article?.description}}</div>
         <p-image *ngIf="article?.thumbnailImageUrl" [src]="article?.thumbnailImageUrl" class="flex justify-content-center"></p-image>
         <app-article-content [content]="article?.content"></app-article-content>
-        <div class="keywords">
+        <div class="keywords" *ngIf="article?.keywords">
             <p-chip *ngFor="let keyword of article?.keywords" [label]="keyword"></p-chip>
         </div>
     </div>

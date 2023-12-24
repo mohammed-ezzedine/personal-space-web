@@ -23,7 +23,7 @@ export class SeoService {
     }
     
     private setKeywords(metada: SeoMetadata) {
-        if (metada.keywords) {
+        if (metada.keywords && metada.keywords.length) {
             this.metaService.addTag({ name: "keywords", content: metada.keywords.reduce((k1, k2) => `${k1}, ${k2}`) });
         }
     }

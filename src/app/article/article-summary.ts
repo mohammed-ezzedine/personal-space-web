@@ -4,5 +4,7 @@ export interface ArticleSummary {
     description: string;
     categoryId: string;
     thumbnailImageUrl?: string;
-    keywords: string[]
+    keywords: string[];
+    createdDate: string;
+    lastModifiedDate: string;
 }
