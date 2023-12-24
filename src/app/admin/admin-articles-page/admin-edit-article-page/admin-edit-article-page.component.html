@@ -1,5 +1,9 @@
 <app-loader [loading]="loading">
     <form [formGroup]="form" class="edit-article-form" *ngIf="shouldRenderForm()">
+
+        <div class="flex w-100 article-property-input justify-content-end">
+            <app-hide-input-toggle formControlName="hidden"></app-hide-input-toggle>
+        </div>
         <span class="p-float-label article-property-input">
             <input pInputText id="title" formControlName="title" />
             <label htmlFor="title">Title</label>

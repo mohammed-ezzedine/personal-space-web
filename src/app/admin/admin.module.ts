@@ -26,6 +26,7 @@ import { LoaderModule } from '../components/loader/loader.module';
 import { RichTextEditorComponent } from '../components/rich-text-editor/rich-text-editor.component';
 import { AdminEditArticlePageComponent } from './admin-articles-page/admin-edit-article-page/admin-edit-article-page.component';
 import { AdminArticlesSummaryComponent } from './admin-articles-page/admin-articles-summary/admin-articles-summary.component';
+import { HideInputToggleComponent } from '../components/hide-input-toggle/hide-input-toggle.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AdminArticlesSummaryComponent } from './admin-articles-page/admin-artic
     ImageModule,
     ChipsModule,
     DataViewModule,
-    PaginatorModule
+    PaginatorModule,
+    HideInputToggleComponent
   ],
   providers: [
     CategoryService,

@@ -8,4 +8,5 @@ export interface Article {
     keywords: string[];
     createdDate: string;
     lastModifiedDate: string;
+    hidden: boolean;
 }

@@ -23,7 +23,8 @@ export class AdminCreateArticlePageComponent implements OnInit, OnDestroy {
     categoryId: ['', [Validators.required]],
     thumbnailImageUrl: [null],
     content: ['', [Validators.required]],
-    keywords: [[]]
+    keywords: [[]],
+    hidden: [true, []]
   });
 
   constructor(private formBuilder: FormBuilder, 
