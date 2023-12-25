@@ -89,13 +89,15 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
     if (this.categoryCandidateNameInput.valid) {
       this.categoryCreationLoading = true;
       this.categoryService.createNewCategory(this.categoryCandidateNameInput.value!)
+        .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: result => {
-            this.categorySummaries.push({
+            this.categorySummaries = [...this.categorySummaries, {
               id: result.id,
               name: this.categoryCandidateNameInput.value!,
               order: result.order,
-            })
+            }]
+            
             this.showSuccessMessage("Category is created.")
             this.categoryCreationLoading = false;
             this.categoryCandidateNameInput.setValue('')
@@ -106,5 +108,21 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
           }
         })
     }
+  }
+
+  deleteCategory(id: string) {
+    console.log("deleting", id)
+    this.categoryService.deleteCategory(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.showSuccessMessage(`Category ${id} was successfully deleted`);
+          this.categorySummaries = this.categorySummaries.filter(c => c.id !== id)
+        },
+        error: error => {
+          console.error("Failed to delete category with ID", id, error);
+          this.showErrorMessage(error.error)
+        }
+      })
   }
 }

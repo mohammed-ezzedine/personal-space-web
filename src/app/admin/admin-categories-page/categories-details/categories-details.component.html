@@ -1,36 +1,8 @@
-
-<!-- <p-table styleClass="p-datatable" [loading]="fetchingCategoriesLoading" [value]="categorySummaries" (onRowReorder)="updateCategoriesOrder($event)">
-    <ng-template pTemplate="header">
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Action</th>
-        </tr>
-        <tr>
-            <th></th>
-            <th>
-                <input  id="new-category-name" pInputText [formControl]="categoryCandidateNameInput" 
-                        [pKeyFilter]="categoryNameValidator" placeholder="New Category"/>
-            </th>
-            <th>
-                <p-button label="Create" [loading]="categoryCreationLoading" (onClick)="createNewCategory()" 
-                          [disabled]="!categoryCandidateNameInput.valid"
-                ></p-button>
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-category let-index="rowIndex">
-        <tr [pReorderableRow]="index">
-            <td><span class="pi pi-bars" pReorderableRowHandle></span></td>
-           <td>{{category.name}}</td>
-           <td>-</td>
-        </tr>
-    </ng-template>
-</p-table> -->
 <p-orderList [value]="categorySummaries" header="Categories" [dragdrop]="true" (onReorder)="reorderCategories($event)" [listStyle]="{ maxHeight: '30rem'}">
     <ng-template let-category pTemplate="item" >
-        <div class="flex flex-wrap p-2 align-items-center gap-3">
+        <div class="flex flex-wrap p-2 align-items-center">
             <div class="flex-1 flex flex-column gap-2"> {{ category.name }} </div>
+            <p-button icon="pi pi-trash" [text]="true" severity="danger" (onClick)="deleteCategory(category.id)"></p-button>    
         </div>
     </ng-template>
 </p-orderList>

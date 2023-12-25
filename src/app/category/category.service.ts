@@ -33,6 +33,10 @@ export class CategoryService {
         return this.http.post<CategoryCreationResponse>(this.getBaseUrl(), { name: categoryCandidateName })
     }
 
+    deleteCategory(id: string) : Observable<void> {
+        return this.http.delete<void>(`${this.getBaseUrl()}/${id}`)
+    }
+
     getBaseUrl() {
         let serverUrl = isPlatformServer(this.platformId)? this.serverUrl : environment.serverBaseUrl;
         return `${serverUrl}/categories`;
