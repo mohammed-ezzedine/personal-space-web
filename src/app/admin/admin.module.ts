@@ -16,6 +16,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { PaginatorModule } from 'primeng/paginator';
 import {MessageModule} from 'primeng/message'; 
+import { OrderListModule } from 'primeng/orderlist';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminArticlesPageComponent } from './admin-articles-page/admin-articles-page.component';
 import { AdminCreateArticlePageComponent } from './admin-articles-page/admin-create-article-page/admin-create-article-page.component';
@@ -59,7 +60,8 @@ import { HideInputToggleComponent } from '../components/hide-input-toggle/hide-i
     DataViewModule,
     PaginatorModule,
     HideInputToggleFormControlComponent,
-    HideInputToggleComponent
+    HideInputToggleComponent,
+    OrderListModule
   ],
   providers: [
     CategoryService,

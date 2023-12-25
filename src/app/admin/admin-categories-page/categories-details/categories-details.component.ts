@@ -66,25 +66,10 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  updateCategoriesOrder(event: TableRowReorderEvent) {
-    if (event.dragIndex == event.dropIndex) {
-      return;
+  reorderCategories(event: any) {
+    for (let i = 0; i < this.categorySummaries.length; i++) {
+      this.categorySummaries[i].order = i + 1;
     }
-
-    this.categorySummaries.forEach(c => {
-      const categoryIndex = c.order - 1;
-      const categoryWasAfterTheTargetAndBecameBeforeIt = categoryIndex > event.dragIndex! && categoryIndex <= event.dropIndex!;
-      const categoryIdTheTarget = categoryIndex == event.dragIndex;
-      const categoryWasBeforeTheTargetAndBecameAfterIt = categoryIndex < event.dragIndex! && categoryIndex >= event.dropIndex!;
-      if (categoryWasAfterTheTargetAndBecameBeforeIt ) {
-        c.order--;
-      } else if (categoryIdTheTarget) {
-        c.order = event.dropIndex! + 1;
-      } else if (categoryWasBeforeTheTargetAndBecameAfterIt) {
-        c.order++;
-      }
-    })
-
     this.categoryService.updateCategoriesOrder(this.categorySummaries.map(c => <CategoryOrder>{ categoryId: c.id, categoryOrder: c.order }))
     .subscribe({
       next: () => this.showSuccessMessage("Categories orders is updated"),
@@ -110,7 +95,6 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
               id: result.id,
               name: this.categoryCandidateNameInput.value!,
               order: result.order,
-              canBeDeleted: true
             })
             this.showSuccessMessage("Category is created.")
             this.categoryCreationLoading = false;
