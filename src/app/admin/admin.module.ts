@@ -26,6 +26,7 @@ import { LoaderModule } from '../components/loader/loader.module';
 import { RichTextEditorComponent } from '../components/rich-text-editor/rich-text-editor.component';
 import { AdminEditArticlePageComponent } from './admin-articles-page/admin-edit-article-page/admin-edit-article-page.component';
 import { AdminArticlesSummaryComponent } from './admin-articles-page/admin-articles-summary/admin-articles-summary.component';
+import { HideInputToggleFormControlComponent } from '../components/hide-input-toggle-form-control/hide-input-toggle-form-control.component';
 import { HideInputToggleComponent } from '../components/hide-input-toggle/hide-input-toggle.component';
 
 @NgModule({
@@ -57,6 +58,7 @@ import { HideInputToggleComponent } from '../components/hide-input-toggle/hide-i
     ChipsModule,
     DataViewModule,
     PaginatorModule,
+    HideInputToggleFormControlComponent,
     HideInputToggleComponent
   ],
   providers: [

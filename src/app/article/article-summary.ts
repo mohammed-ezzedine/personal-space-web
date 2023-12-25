@@ -7,4 +7,5 @@ export interface ArticleSummary {
     keywords: string[];
     createdDate: string;
     lastModifiedDate: string;
+    hidden: boolean;
 }

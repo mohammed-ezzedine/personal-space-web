@@ -14,7 +14,6 @@ import { CategoryService } from 'src/app/category/category.service';
   styleUrl: './admin-articles-summary.component.scss'
 })
 export class AdminArticlesSummaryComponent implements OnInit, OnDestroy {
-
   private readonly destroy$ = new Subject();
 
   articles: ArticleSummary[] = [];
@@ -77,4 +76,20 @@ export class AdminArticlesSummaryComponent implements OnInit, OnDestroy {
     this.destroy$.next({})
     this.destroy$.complete();
   }
+
+  handleArticleVisibilityChange(articleId: string, visibility: boolean) {
+    this.articleService.editArticle(articleId, { hidden: visibility })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.articles.filter(a => a.id === articleId)[0].hidden = visibility;
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Article visibility updated.'})
+        },
+        error: error => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to updated article visibility.'})
+          console.error("Failed to update the visibility of article {}", articleId, error);
+        }
+      })
+  }
+  
 }

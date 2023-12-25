@@ -15,6 +15,7 @@ import { ArticleContentComponent } from './article/article-page/article-content/
 import { ImageModule } from 'primeng/image';
 import { ChipModule } from 'primeng/chip';
 import { DividerModule } from 'primeng/divider';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [

@@ -79,7 +79,7 @@ export class AdminEditArticlePageComponent implements OnInit, OnDestroy {
   submit() {
     if (this.form.valid) {
       this.loading = true;
-      this.articleService.editarticle(this.articleId, this.form.value)
+      this.articleService.editArticle(this.articleId, this.form.value)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {

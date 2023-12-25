@@ -39,7 +39,7 @@ export class ArticleService {
         return this.http.post<ArticleCreationResponse>(this.getBaseUrl(), request);
     }
 
-    editarticle(id: string, request: EditArticleRequest): Observable<void> {
+    editArticle(id: string, request: EditArticleRequest): Observable<void> {
         return this.http.put<void>(`${this.getBaseUrl()}/${id}`, request)
     }
 
