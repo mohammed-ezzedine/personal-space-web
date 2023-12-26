@@ -17,15 +17,23 @@ export class ArticleService {
                 @Inject(PLATFORM_ID) private platformId: Object,
                 @Optional() @Inject(SERVER_URL) private serverUrl: string) { }
 
-    getArticlesSummary(page?: number, pageSize?: number): Observable<Page<ArticleSummary>> {
+    getArticlesSummary(page?: number, pageSize?: number, sortBy?: string, ascOrder?: boolean): Observable<Page<ArticleSummary>> {
         let params : HttpParams = new HttpParams();
 
-        if (page) {
+        if (page !== undefined) {
             params = params.set("page", page);
+
+            if (pageSize !== undefined) {
+                params = params.set("size", pageSize);
+            }
         }
 
-        if (pageSize) {
-            params = params.set("size", pageSize);
+        if (sortBy !== undefined) {
+            params = params.set("sortBy", sortBy);
+
+            if (ascOrder !== undefined) {
+                params = params.set("ascOrder", ascOrder)
+            }
         }
 
         return this.http.get<Page<ArticleSummary>>(this.getBaseUrl(), { params: params });
@@ -43,8 +51,10 @@ export class ArticleService {
         return this.http.put<void>(`${this.getBaseUrl()}/${id}`, request)
     }
 
-    getHighlightedArticles() : Observable<ArticleSummary[]> {
-        return this.http.get<ArticleSummary[]>(`${this.getBaseUrl()}/highlight`);
+    getHighlightedArticles() : Observable<Page<ArticleSummary>> {
+        let params : HttpParams = new HttpParams();
+        params = params.set("highlighted", "true")
+        return this.http.get<Page<ArticleSummary>>(this.getBaseUrl(), { params: params });
     }
 
     getArticleHighlightsSummary() : Observable<ArticleHighlightSummary[]> {

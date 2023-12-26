@@ -26,7 +26,7 @@ export class AdminHighlightedArticlesPageComponent implements OnInit, OnDestroy 
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: articles => {
-        this.articles = articles;
+        this.articles = articles.items;
         this.loading = false;
       },
       error: error => {
