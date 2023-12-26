@@ -6,8 +6,7 @@
             <div class="flex align-items-center gap-3">
                 <span class="flex align-items-center gap-2">
                     <i class="pi pi-tag"></i>
-                    <span class="font-semibold">{{ article.categoryId }}</span> 
-                    <!-- <span class="font-semibold">{{ categoriesSummary.get(article.categoryId) }}</span>  -->
+                    <span class="font-semibold">{{ article.categoryId | category | async }}</span> 
                 </span>
             </div>
             <div class="text-xs">{{ article.createdDate | date }}</div>
