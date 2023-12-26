@@ -2,7 +2,8 @@
     <ng-template let-category pTemplate="item" >
         <div class="flex flex-wrap p-2 align-items-center">
             <div class="flex-1 flex flex-column gap-2"> {{ category.name }} </div>
-            <p-button icon="pi pi-trash" [text]="true" severity="danger" (onClick)="deleteCategory(category.id)"></p-button>    
+            <p-button icon="pi pi-trash" [text]="true" severity="danger" (onClick)="deleteCategory(category.id)"
+                pTooltip="Delete" tooltipPosition="left" [showDelay]="300" [hideDelay]="100"></p-button>    
         </div>
     </ng-template>
 </p-orderList>

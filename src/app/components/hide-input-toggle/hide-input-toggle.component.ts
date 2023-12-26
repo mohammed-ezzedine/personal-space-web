@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-hide-input-toggle',
   standalone: true,
-  imports: [ButtonModule, CommonModule],
+  imports: [ButtonModule, CommonModule, TooltipModule],
   templateUrl: './hide-input-toggle.component.html',
   styleUrl: './hide-input-toggle.component.scss'
 })

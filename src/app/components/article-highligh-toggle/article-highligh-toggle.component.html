@@ -1,6 +1,10 @@
-<div class="flex flex-row">
-    <span id="hide-input-toggle">
-        <p-button icon="pi pi-bookmark-fill" [text]="true" *ngIf="highlighted" (onClick)="toggle()"></p-button>
-        <p-button icon="pi pi-bookmark" [text]="true" *ngIf="!highlighted" (onClick)="toggle()"></p-button>
-    </span>
-</div>
+<p-button 
+    *ngIf="highlighted"
+    icon="pi pi-bookmark-fill" [text]="true" (onClick)="toggle()"
+    pTooltip="Remove from highlights" tooltipPosition="bottom" [showDelay]="300" [hideDelay]="100"
+></p-button>
+<p-button 
+    *ngIf="!highlighted"
+    icon="pi pi-bookmark" [text]="true"  (onClick)="toggle()" severity="secondary" 
+    pTooltip="Add to highlights" tooltipPosition="bottom" [showDelay]="300" [hideDelay]="100"
+></p-button>

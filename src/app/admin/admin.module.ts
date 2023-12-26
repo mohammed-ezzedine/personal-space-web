@@ -32,6 +32,7 @@ import { HideInputToggleComponent } from '../components/hide-input-toggle/hide-i
 import { ArticleHighlighToggleComponent } from '../components/article-highligh-toggle/article-highligh-toggle.component';
 import { AdminHighlightedArticlesPageComponent } from './admin-articles-page/admin-highlighted-articles-page/admin-highlighted-articles-page.component';
 import { ArticleSummaryComponent } from '../article/article-summary/article-summary.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ArticleSummaryComponent } from '../article/article-summary/article-summ
     HideInputToggleComponent,
     OrderListModule,
     ArticleHighlighToggleComponent,
-    ArticleSummaryComponent
+    ArticleSummaryComponent,
+    TooltipModule
   ],
   providers: [
     CategoryService,

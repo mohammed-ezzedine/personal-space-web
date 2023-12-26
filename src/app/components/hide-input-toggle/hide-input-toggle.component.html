@@ -1,6 +1,10 @@
-<div class="flex flex-row">
-    <span id="hide-input-toggle">
-        <p-button icon="pi pi-eye" [text]="true" *ngIf="!hidden" (onClick)="toggle()"></p-button>
-        <p-button icon="pi pi-eye-slash" [text]="true" *ngIf="hidden" (onClick)="toggle()"></p-button>
-    </span>
-</div>
+<p-button 
+    *ngIf="!hidden" 
+    icon="pi pi-eye" [text]="true" (onClick)="toggle()"
+    pTooltip="Hide" tooltipPosition="bottom" [showDelay]="300" [hideDelay]="100"
+></p-button>
+<p-button 
+    *ngIf="hidden" 
+    icon="pi pi-eye-slash" [text]="true" (onClick)="toggle()" severity="secondary"
+    pTooltip="Show" tooltipPosition="bottom" [showDelay]="300" [hideDelay]="100"
+></p-button>
