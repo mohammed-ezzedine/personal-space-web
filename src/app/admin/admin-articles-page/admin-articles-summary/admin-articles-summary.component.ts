@@ -3,9 +3,8 @@ import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core
 import { MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Observable, Subject, concatMap, filter, flatMap, forkJoin, map, merge, mergeMap, switchMap, take, takeUntil } from 'rxjs';
-import { Article } from 'src/app/article/article';
+import { Article, HighlightedArticleSummary } from 'src/app/article/article';
 import { ArticleService } from 'src/app/article/article-service';
-import { ArticleSummary, HighlightedArticleSummary } from 'src/app/article/article-summary';
 import { CategoryService } from 'src/app/category/category.service';
 
 @Component({
@@ -41,7 +40,7 @@ export class AdminArticlesSummaryComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$),
       concatMap(articles => {
         this.numberOfArticles = articles.totalSize;
-        return this.articleService.getHighlightedArticlesSummary()
+        return this.articleService.getArticleHighlightsSummary()
           .pipe(
             takeUntil(this.destroy$),
             map(highlights => articles.items.map(a => {

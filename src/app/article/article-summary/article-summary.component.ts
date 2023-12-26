@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ArticleSummary } from '../article-summary';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CategoryPipe } from 'src/app/category/category.pipe';
+import { ArticleSummary } from '../article';
 
 @Component({
   selector: 'app-article-summary',

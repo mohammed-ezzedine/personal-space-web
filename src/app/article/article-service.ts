@@ -4,13 +4,12 @@ import { Observable } from "rxjs";
 import { CreateArticleRequest } from "./create-article-request";
 import { environment } from "src/environments/environment";
 import { ArticleCreationResponse } from "./article-creation-response";
-import { Article } from "./article";
+import { Article, ArticleSummary } from "./article";
 import { isPlatformServer } from "@angular/common";
 import { SERVER_URL } from "../tokens";
 import { EditArticleRequest } from "./edit-article-request";
-import { ArticleSummary, HighlightedArticleSummary } from "./article-summary";
 import { Page } from "../util/pagination/page";
-import { HighlightedArticle } from "./highlighted-article";
+import { ArticleHighlightSummary } from "./article-highlight-summary";
 
 @Injectable()
 export class ArticleService {
@@ -48,8 +47,8 @@ export class ArticleService {
         return this.http.get<ArticleSummary[]>(`${this.getBaseUrl()}/highlight`);
     }
 
-    getHighlightedArticlesSummary() : Observable<HighlightedArticle[]> {
-        return this.http.get<HighlightedArticle[]>(`${this.getBaseUrl()}/highlight/summary`);
+    getArticleHighlightsSummary() : Observable<ArticleHighlightSummary[]> {
+        return this.http.get<ArticleHighlightSummary[]>(`${this.getBaseUrl()}/highlight/summary`);
     }
 
     addArticleToHighlight(id: string): Observable<void> {
@@ -60,7 +59,7 @@ export class ArticleService {
         return this.http.delete<void>(`${this.getBaseUrl()}/highlight/${id}`)
     }
 
-    updateArticlesHighlights(articles: HighlightedArticle[]): Observable<void> {
+    updateArticlesHighlights(articles: ArticleHighlightSummary[]): Observable<void> {
         return this.http.put<void>(`${this.getBaseUrl()}/highlight`, { articles: articles });
     }
 

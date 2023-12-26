@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
+import { ArticleSummary } from 'src/app/article/article';
 import { ArticleService } from 'src/app/article/article-service';
-import { ArticleSummary } from 'src/app/article/article-summary';
-import { HighlightedArticle } from 'src/app/article/highlighted-article';
+import { ArticleHighlightSummary } from 'src/app/article/article-highlight-summary';
 
 @Component({
   selector: 'app-admin-highlighted-articles-page',
@@ -44,7 +44,7 @@ export class AdminHighlightedArticlesPageComponent implements OnInit, OnDestroy 
 
   reorderHighlights(): void {
     let order = this.articles.map((article, index) => {
-      return { articleId: article.id, rank: index + 1} as HighlightedArticle
+      return { articleId: article.id, rank: index + 1} as ArticleHighlightSummary
     })
     this.loading = true;
     this.articleService.updateArticlesHighlights(order)
