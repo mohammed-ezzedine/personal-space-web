@@ -29,6 +29,9 @@ import { AdminEditArticlePageComponent } from './admin-articles-page/admin-edit-
 import { AdminArticlesSummaryComponent } from './admin-articles-page/admin-articles-summary/admin-articles-summary.component';
 import { HideInputToggleFormControlComponent } from '../components/hide-input-toggle-form-control/hide-input-toggle-form-control.component';
 import { HideInputToggleComponent } from '../components/hide-input-toggle/hide-input-toggle.component';
+import { ArticleHighlighToggleComponent } from '../components/article-highligh-toggle/article-highligh-toggle.component';
+import { AdminHighlightedArticlesPageComponent } from './admin-articles-page/admin-highlighted-articles-page/admin-highlighted-articles-page.component';
+import { ArticleSummaryComponent } from '../article/article-summary/article-summary.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { HideInputToggleComponent } from '../components/hide-input-toggle/hide-i
     AdminCreateArticlePageComponent,
     AdminEditArticlePageComponent,
     CategoriesDropdownComponent,
-    AdminArticlesSummaryComponent
+    AdminArticlesSummaryComponent,
+    AdminHighlightedArticlesPageComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +65,9 @@ import { HideInputToggleComponent } from '../components/hide-input-toggle/hide-i
     PaginatorModule,
     HideInputToggleFormControlComponent,
     HideInputToggleComponent,
-    OrderListModule
+    OrderListModule,
+    ArticleHighlighToggleComponent,
+    ArticleSummaryComponent
   ],
   providers: [
     CategoryService,

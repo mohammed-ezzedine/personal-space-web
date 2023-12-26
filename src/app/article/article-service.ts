@@ -8,8 +8,9 @@ import { Article } from "./article";
 import { isPlatformServer } from "@angular/common";
 import { SERVER_URL } from "../tokens";
 import { EditArticleRequest } from "./edit-article-request";
-import { ArticleSummary } from "./article-summary";
+import { ArticleSummary, HighlightedArticleSummary } from "./article-summary";
 import { Page } from "../util/pagination/page";
+import { HighlightedArticle } from "./highlighted-article";
 
 @Injectable()
 export class ArticleService {
@@ -41,6 +42,26 @@ export class ArticleService {
 
     editArticle(id: string, request: EditArticleRequest): Observable<void> {
         return this.http.put<void>(`${this.getBaseUrl()}/${id}`, request)
+    }
+
+    getHighlightedArticles() : Observable<ArticleSummary[]> {
+        return this.http.get<ArticleSummary[]>(`${this.getBaseUrl()}/highlight`);
+    }
+
+    getHighlightedArticlesSummary() : Observable<HighlightedArticle[]> {
+        return this.http.get<HighlightedArticle[]>(`${this.getBaseUrl()}/highlight/summary`);
+    }
+
+    addArticleToHighlight(id: string): Observable<void> {
+        return this.http.post<void>(`${this.getBaseUrl()}/highlight/${id}`, {})
+    }
+
+    removeArticleFromHighlight(id: string): Observable<void> {
+        return this.http.delete<void>(`${this.getBaseUrl()}/highlight/${id}`)
+    }
+
+    updateArticlesHighlights(articles: HighlightedArticle[]): Observable<void> {
+        return this.http.put<void>(`${this.getBaseUrl()}/highlight`, { articles: articles });
     }
 
     private getBaseUrl() {

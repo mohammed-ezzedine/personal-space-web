@@ -9,3 +9,7 @@ export interface ArticleSummary {
     lastModifiedDate: string;
     hidden: boolean;
 }
+
+export interface HighlightedArticleSummary extends ArticleSummary {
+    highlighted: boolean;
+}

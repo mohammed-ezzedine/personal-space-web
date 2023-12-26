@@ -1,0 +1,11 @@
+<p-orderList [value]="articles" header="Highlighted Articles" [dragdrop]="true" (onReorder)="reorderHighlights()">
+    <ng-template let-article pTemplate="item">
+        <div class="flex flex-wrap p-2 align-items-center gap-3">
+            <app-article-summary class="w-full" [article]="article"></app-article-summary>
+            <div class="justify-content-end w-full flex flex-row">
+                <p-button icon="pi pi-minus" [text]="true" severity="danger" (onClick)="remove(article.id)"></p-button>
+            </div>
+        </div>
+    </ng-template>
+</p-orderList>
+<p-toast></p-toast>

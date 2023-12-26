@@ -4,10 +4,12 @@ import { AdminCategoriesPageComponent } from "./admin-categories-page/admin-cate
 import { AdminArticlesPageComponent } from "./admin-articles-page/admin-articles-page.component";
 import { AdminCreateArticlePageComponent } from "./admin-articles-page/admin-create-article-page/admin-create-article-page.component";
 import { AdminEditArticlePageComponent } from "./admin-articles-page/admin-edit-article-page/admin-edit-article-page.component";
+import { AdminHighlightedArticlesPageComponent } from "./admin-articles-page/admin-highlighted-articles-page/admin-highlighted-articles-page.component";
 
 const routes: Routes = [
     { path: 'categories', component: AdminCategoriesPageComponent },
     { path: 'articles', component: AdminArticlesPageComponent },
+    { path: 'articles/highlights', component: AdminHighlightedArticlesPageComponent },
     { path: 'articles/new-article', component: AdminCreateArticlePageComponent },
     { path: 'articles/edit/:id', component: AdminEditArticlePageComponent }
 ]

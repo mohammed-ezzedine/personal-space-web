@@ -2,10 +2,10 @@ import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
-import { Observable, Subject, concatMap, filter, flatMap, forkJoin, map, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, concatMap, filter, flatMap, forkJoin, map, merge, mergeMap, switchMap, take, takeUntil } from 'rxjs';
 import { Article } from 'src/app/article/article';
 import { ArticleService } from 'src/app/article/article-service';
-import { ArticleSummary } from 'src/app/article/article-summary';
+import { ArticleSummary, HighlightedArticleSummary } from 'src/app/article/article-summary';
 import { CategoryService } from 'src/app/category/category.service';
 
 @Component({
@@ -16,9 +16,10 @@ import { CategoryService } from 'src/app/category/category.service';
 export class AdminArticlesSummaryComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject();
 
-  articles: ArticleSummary[] = [];
+  articles: HighlightedArticleSummary[] = [];
   loading: boolean = false;
   categoriesSummary: Map<any, string> = new Map();
+  highlightedArticles: string[] = [];
   pageIndex: number = 0;
   numberOfArticles: number = 0;
   readonly pageSize: number = 10;
@@ -38,9 +39,19 @@ export class AdminArticlesSummaryComponent implements OnInit, OnDestroy {
   private fetchArticles() {
     this.articleService.getArticlesSummary(this.pageIndex, this.pageSize).pipe(
       takeUntil(this.destroy$),
-      map(articles => {
-        this.articles = articles.items;
+      concatMap(articles => {
         this.numberOfArticles = articles.totalSize;
+        return this.articleService.getHighlightedArticlesSummary()
+          .pipe(
+            takeUntil(this.destroy$),
+            map(highlights => articles.items.map(a => {
+                return {...a, highlighted: highlights.map(h => h.articleId).includes(a.id) } as HighlightedArticleSummary
+              })
+            )
+          )
+      }),
+      map(articles => {
+        this.articles = articles;
         return this.articles.map(a => a.categoryId);
       }),
       map(categoryIds => Array.from(new Set(categoryIds))),
@@ -90,6 +101,21 @@ export class AdminArticlesSummaryComponent implements OnInit, OnDestroy {
           console.error("Failed to update the visibility of article {}", articleId, error);
         }
       })
+  }
+
+  handleArticleHighlightChange(articleId: string, highlight: boolean) {
+    let observable = highlight ? this.articleService.addArticleToHighlight(articleId) : this.articleService.removeArticleFromHighlight(articleId)
+    observable.pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: () => {
+        this.articles.filter(a => a.id === articleId)[0].highlighted = highlight;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Article highlight updated.'})
+      },
+      error: error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to updated article highlight.'})
+          console.error("Failed to update the highlight of article {}", articleId, error);
+      }
+    })
   }
   
 }
