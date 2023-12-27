@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TransferState, makeStateKey } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject, takeUntil } from 'rxjs';
@@ -13,6 +14,7 @@ import { ArticleService } from 'src/app/article/article-service';
 export class LatestArticlesComponent implements OnInit, OnDestroy{
 
   private readonly destroy$ = new Subject();
+  private readonly SERVER_DATA_KEY = makeStateKey<ArticleSummary[]>("latestArticlesSummary")
 
   loading = false;
   articles: ArticleSummary[] = [];
@@ -21,9 +23,19 @@ export class LatestArticlesComponent implements OnInit, OnDestroy{
   readonly pageSize: number = 10;
 
   constructor(private articleService: ArticleService,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private transferState: TransferState,
+              @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      if (this.transferState.hasKey(this.SERVER_DATA_KEY)) {
+        this.articles = this.transferState.get<ArticleSummary[]>(this.SERVER_DATA_KEY, []);
+        this.transferState.remove(this.SERVER_DATA_KEY);
+        return;
+      }
+    }
+
     this.fetchArticles();
   }
 
@@ -42,6 +54,10 @@ export class LatestArticlesComponent implements OnInit, OnDestroy{
           this.articles = data.items;
           this.totalNumberOfArticles = data.totalSize;
           this.loading = false;
+
+          if (isPlatformServer(this.platformId)) {
+            this.transferState.set(this.SERVER_DATA_KEY, this.articles);
+          }
         },
         error: error => {
           console.error("Failed to fetch the list of articles", error);
