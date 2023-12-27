@@ -1,9 +1,9 @@
 <app-loader [loading]="loading">
-    <p-dataView [value]="articles">
+    <p-dataView [value]="articles" styleClass="mt-5">
         <ng-template pTemplate="list" let-articles>
             <div class="grid grid-nogutter">
-                <div class="col-12" *ngFor="let article of articles; let first = first">
-                    <div class="p-4" [ngClass]="{ 'border-top-1 surface-border': !first }">
+                <div class="col-12 surface-50" *ngFor="let article of articles">
+                    <div class="p-4 border-1 surface-border surface-card border-round mb-3 shadow-1">
                         <app-article-summary [article]="article"></app-article-summary>
                         <div class="flex flex-row justify-content-end w-full p-buttonset">
                             <app-article-highligh-toggle [highlighted]="article.highlighted" (highlightChange)="handleArticleHighlightChange(article.id, $event)"></app-article-highligh-toggle>
@@ -18,7 +18,7 @@
         </ng-template>
     </p-dataView>
     <p-paginator (onPageChange)="onPageChange($event)" [first]="pageIndex * pageSize" [rows]="pageSize" [totalRecords]="numberOfArticles"
-        [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"
+        [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}" styleClass="shadow-1 border-1 surface-border"
     ></p-paginator>
 </app-loader>
 <p-toast></p-toast>

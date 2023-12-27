@@ -16,6 +16,7 @@ import { ImageModule } from 'primeng/image';
 import { ChipModule } from 'primeng/chip';
 import { DividerModule } from 'primeng/divider';
 import { ToastModule } from 'primeng/toast';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ToastModule } from 'primeng/toast';
     ChipModule,
     ProgressSpinnerModule,
     LoaderModule,
-    DividerModule
+    DividerModule,
+    NavbarComponent
   ],
   providers: [CategoryService, provideClientHydration()],
   bootstrap: [AppComponent],
