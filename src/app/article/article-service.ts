@@ -51,10 +51,8 @@ export class ArticleService {
         return this.http.put<void>(`${this.getBaseUrl()}/${id}`, request)
     }
 
-    getHighlightedArticles() : Observable<Page<ArticleSummary>> {
-        let params : HttpParams = new HttpParams();
-        params = params.set("highlighted", "true")
-        return this.http.get<Page<ArticleSummary>>(this.getBaseUrl(), { params: params });
+    getHighlightedArticles() : Observable<ArticleSummary[]> {
+        return this.http.get<ArticleSummary[]>(`${this.getBaseUrl()}/highlight`);
     }
 
     getArticleHighlightsSummary() : Observable<ArticleHighlightSummary[]> {

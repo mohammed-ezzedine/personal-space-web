@@ -17,12 +17,18 @@ import { ChipModule } from 'primeng/chip';
 import { DividerModule } from 'primeng/divider';
 import { ToastModule } from 'primeng/toast';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomePageComponent } from './pages/home/home-page.component';
+import { HighlightedArticlesComponent } from './pages/home/highlighted-articles/highlighted-articles.component';
+import { ArticleSummaryComponent } from './article/article-summary/article-summary.component';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlePageComponent,
     ArticleContentComponent,
+    HomePageComponent,
+    HighlightedArticlesComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ProgressSpinnerModule,
     LoaderModule,
     DividerModule,
-    NavbarComponent
+    NavbarComponent,
+    ArticleSummaryComponent,
+    CardModule
   ],
   providers: [CategoryService, provideClientHydration()],
   bootstrap: [AppComponent],
