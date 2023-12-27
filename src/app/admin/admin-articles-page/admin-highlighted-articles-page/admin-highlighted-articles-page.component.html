@@ -1,4 +1,4 @@
-<p-orderList [value]="articles" header="Highlighted Articles" [dragdrop]="true" (onReorder)="reorderHighlights()">
+<p-orderList [value]="articles" header="Highlighted Articles" [dragdrop]="true" (onReorder)="reorderHighlights()" [responsive]="true">
     <ng-template let-article pTemplate="item">
         <div class="flex flex-wrap p-2 align-items-center gap-3">
             <app-article-summary class="w-full" [article]="article"></app-article-summary>
@@ -9,5 +9,8 @@
             </div>
         </div>
     </ng-template>
+    <ng-template pTemplate="empty">
+        <app-article-summary-skeleton [repeat]="3"></app-article-summary-skeleton>
+    </ng-template>
 </p-orderList>
-<p-toast></p-toast>
+<app-toast></app-toast>

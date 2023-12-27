@@ -17,8 +17,8 @@
             </div>
         </ng-template>
     </p-dataView>
-    <p-paginator (onPageChange)="onPageChange($event)" [first]="pageIndex * pageSize" [rows]="pageSize" [totalRecords]="numberOfArticles"
-        [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}" styleClass="shadow-1 border-1 surface-border"
-    ></p-paginator>
+    <app-paginator (onPageChange)="onPageChange($event)" [pageIndex]="pageIndex" [pageSize]="pageSize" [totalRecords]="numberOfArticles" 
+        styleClass="shadow-1 border-1 surface-border"></app-paginator>
+
 </app-loader>
-<p-toast></p-toast>
+<app-toast></app-toast>

@@ -1,12 +1,18 @@
-<div class="flex flex-column align-items-start gap-4" [ngClass]="{ 'opacity-30': article.hidden, 'md:flex-row': !small}">
-    <div class="w-full gap-4 flex flex-column align-items-start">
-        <a [routerLink]="['/articles', article.id]" class="text-2xl font-bold text-900 no-underline text-left">{{ article.title }}</a>
-        <div class="text-sm description text-justify">{{ article.description }}</div>
+<div class="flex flex-column" [ngClass]="{ 'opacity-30': article.hidden }">
+    <div class="flex flex-column align-items-start gap-4" [ngClass]="{ 'md:flex-row': !small}">
+        <div class="w-full gap-4 flex flex-column align-items-start">
+            <a [routerLink]="['/articles', article.id]" class="text-2xl font-bold text-900 no-underline text-left">{{ article.title }}</a>
+            <div class="text-xs text-color-secondary">{{ article.createdDate | date }} · {{ article.estimatedReadingTime }} </div>
+            <div class="text-sm description text-justify">{{ article.description }}</div>
+            
+        </div>
+        <img class="max-w-10rem max-h-10rem border-round align-self-center" *ngIf="article.thumbnailImageUrl" [src]="article.thumbnailImageUrl" />
+    </div>
+    <div class="flex flex-row justify-content-between w-full">
         <span class="flex align-items-center gap-2">
             <i class="pi pi-tag"></i>
             <span class="font-semibold">{{ article.categoryId | category | async }}</span> 
         </span>
-        <div class="text-xs">{{ article.createdDate | date }}</div>
+        <p-button icon="pi pi-link" [text]="true" (onClick)="copyLink()"></p-button>
     </div>
-    <img class="max-w-10rem max-h-10rem border-round align-self-center" *ngIf="article.thumbnailImageUrl" [src]="article.thumbnailImageUrl" />
 </div>

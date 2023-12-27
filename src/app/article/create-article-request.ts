@@ -6,4 +6,5 @@ export interface CreateArticleRequest {
     hidden: boolean;
     thumbnailImageUrl?: string;
     keywords: string[];
+    estimatedReadingTime: string;
 }

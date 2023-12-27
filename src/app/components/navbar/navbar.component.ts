@@ -50,7 +50,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       {
         label: 'Admin',
         icon: 'pi pi-lock',
-        routerLink: '/admin',
         items: [
           {
             label: 'Manage Articles',

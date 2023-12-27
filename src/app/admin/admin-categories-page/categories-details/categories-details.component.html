@@ -1,4 +1,13 @@
-<p-orderList [value]="categorySummaries" header="Categories" [dragdrop]="true" (onReorder)="reorderCategories($event)" [listStyle]="{ maxHeight: '30rem'}">
+<form class="mt-5 w-100 formgroup-inline justify-content-center">
+    <input id="new-category-name" pInputText [formControl]="categoryCandidateNameInput" class="field"
+        [pKeyFilter]="categoryNameValidator" placeholder="New Category"/>
+    <p-button label="Add" [loading]="categoryCreationLoading" (onClick)="createNewCategory()"
+        [disabled]="!categoryCandidateNameInput.valid"
+    ></p-button>
+</form>
+
+<p-orderList [value]="categorySummaries" header="Categories" [dragdrop]="true" (onReorder)="reorderCategories($event)" 
+    [listStyle]="{ maxHeight: '30rem'}" [responsive]="true">
     <ng-template let-category pTemplate="item" >
         <div class="flex flex-wrap p-2 align-items-center">
             <div class="flex-1 flex flex-column gap-2"> {{ category.name }} </div>
@@ -7,12 +16,3 @@
         </div>
     </ng-template>
 </p-orderList>
-
-<form class="mt-5 w-100 formgroup-inline justify-content-center">
-    <input id="new-category-name" pInputText [formControl]="categoryCandidateNameInput" class="field"
-        [pKeyFilter]="categoryNameValidator" placeholder="New Category"/>
-    <p-button label="Add" [loading]="categoryCreationLoading" (onClick)="createNewCategory()"
-        [disabled]="!categoryCandidateNameInput.valid"
-    ></p-button>
-</form>
-<p-toast></p-toast>

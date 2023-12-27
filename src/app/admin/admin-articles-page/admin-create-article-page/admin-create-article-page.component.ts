@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
+import { ArticleReadTimeEstimatorService } from 'src/app/article/article-read-time-estimator.service';
 import { ArticleService } from 'src/app/article/article-service';
 
 @Component({
@@ -24,13 +25,15 @@ export class AdminCreateArticlePageComponent implements OnInit, OnDestroy {
     thumbnailImageUrl: [null],
     content: ['', [Validators.required]],
     keywords: [[]],
-    hidden: [true, []]
+    hidden: [true, []],
+    estimatedReadingTime: ['', [Validators.required]]
   });
 
   constructor(private formBuilder: FormBuilder, 
               private articleService: ArticleService, 
               private messageService: MessageService,
               private router: Router,
+              private readTimeEstimatorService: ArticleReadTimeEstimatorService,
               @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
@@ -46,6 +49,7 @@ export class AdminCreateArticlePageComponent implements OnInit, OnDestroy {
   }
 
   createArticle() {
+    this.form.controls['estimatedReadingTime'].setValue(this.readTimeEstimatorService.estimate(this.form.value))
     if (this.form.valid) {
       this.loadingArticleCreation = true;
       this.articleService.createArticle(this.form.value)

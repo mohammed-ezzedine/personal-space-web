@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subject, concatMap, flatMap, map, mergeMap, switchMap, takeUntil } from 'rxjs';
 import { Article } from 'src/app/article/article';
+import { ArticleReadTimeEstimatorService } from 'src/app/article/article-read-time-estimator.service';
 import { ArticleService } from 'src/app/article/article-service';
 
 @Component({
@@ -25,7 +26,8 @@ export class AdminEditArticlePageComponent implements OnInit, OnDestroy {
     thumbnailImageUrl: [null],
     content: ['', [Validators.required]],
     keywords: [[]],
-    hidden: [false, []]
+    hidden: [false, []],
+    estimatedReadingTime: ['', [Validators.required]]
   });
 
   articleId: string = '';
@@ -35,6 +37,7 @@ export class AdminEditArticlePageComponent implements OnInit, OnDestroy {
               private messageService : MessageService,
               private formBuilder: FormBuilder,
               private router: Router,
+              private readTimeEstimatorService: ArticleReadTimeEstimatorService,
               @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
@@ -54,7 +57,8 @@ export class AdminEditArticlePageComponent implements OnInit, OnDestroy {
           'thumbnailImageUrl': data.thumbnailImageUrl,
           'content': data.content,
           'keywords': data.keywords,
-          'hidden': data.hidden
+          'hidden': data.hidden,
+          'estimatedReadingTime': data.estimatedReadingTime
         })
 
         this.loading = false;
@@ -77,6 +81,7 @@ export class AdminEditArticlePageComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+    this.form.controls['estimatedReadingTime'].setValue(this.readTimeEstimatorService.estimate(this.form.value))
     if (this.form.valid) {
       this.loading = true;
       this.articleService.editArticle(this.articleId, this.form.value)

@@ -5,8 +5,5 @@
             <app-article-summary [article]="article"></app-article-summary> 
         </div>
     </div>
-    <p-paginator (onPageChange)="onPageChange($event)" [first]="pageIndex * pageSize" [rows]="pageSize" [totalRecords]="totalNumberOfArticles"
-    [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}" styleClass=""
-    ></p-paginator>
+    <app-paginator (onPageChange)="onPageChange($event)" [pageIndex]="pageIndex" [pageSize]="pageSize" [totalRecords]="totalNumberOfArticles"></app-paginator>
 </p-card>
-<p-toast></p-toast>

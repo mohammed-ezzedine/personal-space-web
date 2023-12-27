@@ -1,8 +1,8 @@
 <app-loader [loading]="loadingFetchingArticle">
     <div>
         <h1>{{article?.title}}</h1>
-        <div *ngIf="article?.createdDate" class="text-xs text-color-secondary">Published {{ article?.createdDate | date }}</div>
-        <div class="text-lg font-medium text-justify mt-3">{{article?.description}}</div>
+        <div *ngIf="article?.createdDate" class="text-xs text-color-secondary">Published {{ article?.createdDate | date }}  · {{ article?.estimatedReadingTime }}</div>
+        <div class="text-lg text-justify mt-3">{{article?.description}}</div>
         <p-image *ngIf="article?.thumbnailImageUrl" [src]="article?.thumbnailImageUrl" class="flex justify-content-center"></p-image>
         <app-article-content [content]="article?.content"></app-article-content>
         <div class="keywords" *ngIf="article?.keywords">

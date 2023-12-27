@@ -32,6 +32,7 @@ export class HighlightedArticlesComponent implements OnInit, OnDestroy {
         error: error => {
           console.error("Failed to fetch the list of highlighted articles", error)
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to fetch the list of highlighted articles'})
+          this.loading = false;
         }
       })
   }

@@ -6,4 +6,5 @@ export interface EditArticleRequest {
     hidden?: boolean;
     thumbnailImageUrl?: string;
     keywords?: string[];
+    estimatedReadingTime?: string;
 }

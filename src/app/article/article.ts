@@ -8,6 +8,7 @@ export interface ArticleSummary {
     createdDate: string;
     lastModifiedDate: string;
     hidden: boolean;
+    estimatedReadingTime: string;
 }
 
 export interface HighlightedArticleSummary extends ArticleSummary {
