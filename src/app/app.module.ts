@@ -21,6 +21,10 @@ import { HomePageComponent } from './pages/home/home-page.component';
 import { HighlightedArticlesComponent } from './pages/home/highlighted-articles/highlighted-articles.component';
 import { ArticleSummaryComponent } from './article/article-summary/article-summary.component';
 import { CardModule } from 'primeng/card';
+import { LatestArticlesComponent } from './pages/home/latest-articles/latest-articles.component';
+import { ArticleSummarySkeletonComponent } from './article/article-summary-skeleton/article-summary-skeleton.component';
+import { PaginatorModule } from 'primeng/paginator';
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,7 @@ import { CardModule } from 'primeng/card';
     ArticleContentComponent,
     HomePageComponent,
     HighlightedArticlesComponent,
+    LatestArticlesComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,11 @@ import { CardModule } from 'primeng/card';
     DividerModule,
     NavbarComponent,
     ArticleSummaryComponent,
-    CardModule
+    CardModule,
+    ArticleSummarySkeletonComponent,
+    ToastModule,
+    PaginatorModule,
+    ScrollTopModule
   ],
   providers: [CategoryService, provideClientHydration()],
   bootstrap: [AppComponent],

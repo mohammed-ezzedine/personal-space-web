@@ -1,0 +1,12 @@
+<p-card header="Latest Articles">
+    <app-article-summary-skeleton *ngIf="loading" [repeat]="3"></app-article-summary-skeleton>
+    <div *ngFor="let article of articles; let first = first">
+        <div class="pb-3 " [ngClass]="{ 'border-top-1 pt-3 border-300': !first}">
+            <app-article-summary [article]="article"></app-article-summary> 
+        </div>
+    </div>
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="pageIndex * pageSize" [rows]="pageSize" [totalRecords]="totalNumberOfArticles"
+    [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}" styleClass=""
+    ></p-paginator>
+</p-card>
+<p-toast></p-toast>

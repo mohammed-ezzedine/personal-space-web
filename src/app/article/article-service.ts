@@ -38,6 +38,13 @@ export class ArticleService {
 
         return this.http.get<Page<ArticleSummary>>(this.getBaseUrl(), { params: params });
     }
+
+    getArticlesSummary2(params: { [param: string]: any}): Observable<Page<ArticleSummary>> {
+        let httpParams : HttpParams = new HttpParams();
+        httpParams.appendAll(params)
+
+        return this.http.get<Page<ArticleSummary>>(this.getBaseUrl(), { params: params });
+    }
     
     getArticle(id: string): Observable<Article> {
         return this.http.get<Article>(`${this.getBaseUrl()}/${id}`);

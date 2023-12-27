@@ -15,4 +15,7 @@ export class ArticleSummaryComponent {
 
   @Input()
   article!: ArticleSummary;
+
+  @Input()
+  small: boolean = false;
 }
