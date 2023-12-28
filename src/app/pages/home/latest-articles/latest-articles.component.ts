@@ -14,7 +14,8 @@ import { ArticleService } from 'src/app/article/article-service';
 export class LatestArticlesComponent implements OnInit, OnDestroy{
 
   private readonly destroy$ = new Subject();
-  private readonly SERVER_DATA_KEY = makeStateKey<ArticleSummary[]>("latestArticlesSummary")
+  private readonly SERVER_ARTICLES_DATA_KEY = makeStateKey<ArticleSummary[]>("latestArticlesSummary")
+  private readonly SERVER_ARTICLES_NUMBER_DATA_KEY = makeStateKey<number>("totalNumberOfLatestArticlesSummary")
 
   loading = false;
   articles: ArticleSummary[] = [];
@@ -29,10 +30,15 @@ export class LatestArticlesComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      if (this.transferState.hasKey(this.SERVER_DATA_KEY)) {
-        this.articles = this.transferState.get<ArticleSummary[]>(this.SERVER_DATA_KEY, []);
-        this.transferState.remove(this.SERVER_DATA_KEY);
-        return;
+      if (this.transferState.hasKey(this.SERVER_ARTICLES_DATA_KEY)) {
+        this.articles = this.transferState.get<ArticleSummary[]>(this.SERVER_ARTICLES_DATA_KEY, []);
+        this.transferState.remove(this.SERVER_ARTICLES_DATA_KEY);
+
+        if (this.transferState.hasKey(this.SERVER_ARTICLES_NUMBER_DATA_KEY)) {
+          this.totalNumberOfArticles = this.transferState.get<number>(this.SERVER_ARTICLES_NUMBER_DATA_KEY, 0);
+          this.transferState.remove(this.SERVER_ARTICLES_NUMBER_DATA_KEY);
+          return;
+        }
       }
     }
 
@@ -56,7 +62,8 @@ export class LatestArticlesComponent implements OnInit, OnDestroy{
           this.loading = false;
 
           if (isPlatformServer(this.platformId)) {
-            this.transferState.set(this.SERVER_DATA_KEY, this.articles);
+            this.transferState.set(this.SERVER_ARTICLES_DATA_KEY, this.articles);
+            this.transferState.set(this.SERVER_ARTICLES_NUMBER_DATA_KEY, this.totalNumberOfArticles);
           }
         },
         error: error => {
