@@ -1,5 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { NullValidationHandler, OAuthService } from 'angular-oauth2-oidc';
 import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { Subject, takeUntil } from 'rxjs';
 import { Category } from 'src/app/category/category';
@@ -8,7 +11,7 @@ import { CategoryService } from 'src/app/category/category.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MenubarModule],
+  imports: [MenubarModule, ButtonModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -16,11 +19,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject();
 
+  isAdmin = false;
   items: MenuItem[] | undefined;
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService,
+              private oauthService: OAuthService,
+              @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isAdmin = this.oauthService.hasValidAccessToken()
+    }
+
     this.categoryService.getCategorySummaries()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -50,6 +60,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       {
         label: 'Admin',
         icon: 'pi pi-lock',
+        visible: this.isAdmin,
         items: [
           {
             label: 'Manage Articles',
@@ -67,5 +78,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next({})
     this.destroy$.complete()
+  }
+
+  logout() {
+    this.oauthService.logOut();
   }
 }

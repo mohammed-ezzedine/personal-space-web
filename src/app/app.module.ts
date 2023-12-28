@@ -26,6 +26,7 @@ import { HighlightedArticlesComponent } from './pages/home/highlighted-articles/
 import { HomePageComponent } from './pages/home/home-page.component';
 import { LatestArticlesComponent } from './pages/home/latest-articles/latest-articles.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,12 @@ import { ToastComponent } from './components/toast/toast.component';
     ArticleSummarySkeletonComponent,
     ToastComponent,
     PaginatorComponent,
-    ScrollTopModule
+    ScrollTopModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        sendAccessToken: true,
+      }
+    })
   ],
   providers: [CategoryService, provideClientHydration()],
   bootstrap: [AppComponent],
