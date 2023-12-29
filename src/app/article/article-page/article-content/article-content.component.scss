@@ -6,8 +6,13 @@ pre {
    padding: 10px;
    border: 1px solid var(--surface-300) !important;
    border-radius: var(--border-radius);
+   overflow: overlay;
 }
 
 img {
    max-width: 100%;
+}
+
+p {
+   word-break: break-word;
 }

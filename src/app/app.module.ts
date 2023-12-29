@@ -27,12 +27,15 @@ import { HomePageComponent } from './pages/home/home-page.component';
 import { LatestArticlesComponent } from './pages/home/latest-articles/latest-articles.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { SkeletonModule } from 'primeng/skeleton';
+import { ArticleContentSkeletonComponent } from './article/article-page/article-content-skeleton/article-content-skeleton.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlePageComponent,
     ArticleContentComponent,
+    ArticleContentSkeletonComponent,
     HomePageComponent,
     HighlightedArticlesComponent,
     LatestArticlesComponent
@@ -56,6 +59,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     ToastComponent,
     PaginatorComponent,
     ScrollTopModule,
+    SkeletonModule,
     OAuthModule.forRoot({
       resourceServer: {
         sendAccessToken: true,

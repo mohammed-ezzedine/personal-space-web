@@ -1,12 +1,19 @@
-<app-loader [loading]="loadingFetchingArticle">
-    <div>
-        <h1>{{article?.title}}</h1>
-        <div *ngIf="article?.createdDate" class="text-xs text-color-secondary">Published {{ article?.createdDate | date }}  · {{ article?.estimatedReadingTime }}</div>
-        <div class="text-lg text-justify mt-3">{{article?.description}}</div>
-        <p-image *ngIf="article?.thumbnailImageUrl" [src]="article?.thumbnailImageUrl" class="flex justify-content-center"></p-image>
-        <app-article-content [content]="article?.content"></app-article-content>
-        <div class="keywords" *ngIf="article?.keywords">
-            <p-chip *ngFor="let keyword of article?.keywords" [label]="keyword"></p-chip>
+<app-article-content-skeleton *ngIf="loadingFetchingArticle"></app-article-content-skeleton>
+<p-card styleClass="sm:p-3" *ngIf="!loadingFetchingArticle">
+
+    <ng-template pTemplate="header">
+
+        <div class="py-2 sm:py-0 px-3">
+            <h2>{{article?.title}}</h2>
         </div>
+    </ng-template>
+
+    <div *ngIf="article?.createdDate" class="text-xs text-color-secondary">Published {{ article?.createdDate | date }}  · {{ article?.estimatedReadingTime }}</div>
+    <div class="text-lg text-justify my-3">{{article?.description}}</div>
+    <p-image *ngIf="article?.thumbnailImageUrl" [src]="article?.thumbnailImageUrl" class="flex justify-content-center"></p-image>
+    <app-article-content [content]="article?.content"></app-article-content>
+    <div class="keywords" *ngIf="article?.keywords">
+        <p-chip *ngFor="let keyword of article?.keywords;" [label]="keyword" styleClass="mb-1 sm:mb-0"></p-chip>
     </div>
-</app-loader>
+   
+</p-card>
