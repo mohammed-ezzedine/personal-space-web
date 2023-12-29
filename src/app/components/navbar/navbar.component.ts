@@ -1,5 +1,5 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TransferState, makeStateKey } from '@angular/core';
 import { NullValidationHandler, OAuthService } from 'angular-oauth2-oidc';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -18,23 +18,35 @@ import { CategoryService } from 'src/app/category/category.service';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject();
+  private readonly SERVER_CATEGORIES_DATA_KEY = makeStateKey<Category[]>("navbarCategories")
 
   isAdmin = false;
   items: MenuItem[] | undefined;
 
   constructor(private categoryService: CategoryService,
               private oauthService: OAuthService,
+              private transferState: TransferState,
               @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.isAdmin = this.oauthService.hasValidAccessToken()
+      this.isAdmin = this.oauthService.hasValidAccessToken();
+
+      if (this.transferState.hasKey(this.SERVER_CATEGORIES_DATA_KEY)) {
+        let categories = this.transferState.get<Category[]>(this.SERVER_CATEGORIES_DATA_KEY, []);
+        this.transferState.remove(this.SERVER_CATEGORIES_DATA_KEY);
+        this.initializeItems(categories);
+        return;
+      }
     }
 
     this.categoryService.getCategorySummaries()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: categories => {
+          if (isPlatformServer(this.platformId)) {
+            this.transferState.set(this.SERVER_CATEGORIES_DATA_KEY, categories);
+          }
           this.initializeItems(categories);
         }
       })
@@ -51,6 +63,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       {
         label: 'Categories',
         icon: 'pi pi-tags',
+        visible: false,
         items: categories.map(c => {
           return { 
             label: c.name
