@@ -4,13 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production --base-href /experimental/",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "dev:ssr": "ng run personal-space-web:serve-ssr",
     "serve:ssr": "node dist/personal-space-web/server/main.js",
     "build:ssr": "ng build --configuration development && ng run personal-space-web:server",
-    "prod:ssr": "ng build --configuration production --base-href /experimental/ && ng run personal-space-web:server",
+    "prod:ssr": "ng build --configuration production && ng run personal-space-web:server",
     "prerender": "ng run personal-space-web:prerender"
   },
   "workspaces": [

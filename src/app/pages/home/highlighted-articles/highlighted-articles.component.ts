@@ -27,6 +27,7 @@ export class HighlightedArticlesComponent implements OnInit, OnDestroy {
       if (this.transferState.hasKey(this.SERVER_DATA_KEY)) {
         this.articles = this.transferState.get<ArticleSummary[]>(this.SERVER_DATA_KEY, []);
         this.transferState.remove(this.SERVER_DATA_KEY);
+        return;
       }
     }
 
