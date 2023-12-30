@@ -1,12 +1,13 @@
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TransferState, makeStateKey } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Subject, concatMap, map, takeUntil } from 'rxjs';
-import { Article, ArticleSummary } from 'src/app/article/article';
+import { Subject, concatMap, takeUntil } from 'rxjs';
+import { ArticleSummary } from 'src/app/article/article';
 import { ArticleService } from 'src/app/article/article-service';
 import { Category } from 'src/app/category/category';
 import { CategoryService } from 'src/app/category/category.service';
+import { SeoService } from 'src/app/services/seo/seo.service';
 
 @Component({
   selector: 'app-category-articles',
@@ -34,6 +35,8 @@ export class CategoryArticlesComponent implements OnInit, OnDestroy {
               private articleService: ArticleService,
               private messageService: MessageService,
               private categoryService: CategoryService,
+              private router: Router,
+              private seoService: SeoService,
               private transferState: TransferState,
               @Inject(PLATFORM_ID) private platformId: Object) { }
 
@@ -49,7 +52,17 @@ export class CategoryArticlesComponent implements OnInit, OnDestroy {
     .subscribe({
       next: data => {
         this.category = data;
+        this.seoService.setMetadata({
+          title: data.name,
+          description: `${data.name} Articles`
+        })
         this.fetchArticlesSummary();
+      },
+      error: error => {
+        if (error.status == 404) {
+          this.router.navigateByUrl('not-found')
+          return;
+        }
       }
     })
   }

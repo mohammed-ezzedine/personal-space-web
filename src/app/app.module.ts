@@ -31,6 +31,8 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { ArticleContentSkeletonComponent } from './article/article-page/article-content-skeleton/article-content-skeleton.component';
 import { CategoryArticlesComponent } from './pages/category-articles/category-articles.component';
 import { CategoryPipe } from './category/category.pipe';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { CategoryPipe } from './category/category.pipe';
     HomePageComponent,
     HighlightedArticlesComponent,
     LatestArticlesComponent,
-    CategoryArticlesComponent
+    CategoryArticlesComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ import { CategoryPipe } from './category/category.pipe';
     ScrollTopModule,
     SkeletonModule,
     CategoryPipe,
+    ButtonModule,
     OAuthModule.forRoot({
       resourceServer: {
         sendAccessToken: true,

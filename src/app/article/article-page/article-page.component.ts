@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TransferState, makeStateKey } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subject, concatMap, takeUntil } from 'rxjs';
 import { SeoService } from 'src/app/services/seo/seo.service';
@@ -28,6 +28,7 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
     private messageService : MessageService,
     private seoService: SeoService,
     private transferState: TransferState,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
@@ -60,6 +61,11 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
           this.storeArticleInServerData();
         },
         error: (error: HttpErrorResponse) => {
+          if (error.status == 404) {
+            this.router.navigateByUrl('not-found')
+            return;
+          }
+
           console.error(`failed to fetch the article with ID ${this.articleId}`, error)
           this.loadingFetchingArticle = false;
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to fetch article details.'})

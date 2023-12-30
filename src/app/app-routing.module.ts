@@ -4,6 +4,7 @@ import { ArticlePageComponent } from './article/article-page/article-page.compon
 import { HomePageComponent } from './pages/home/home-page.component';
 import { authGuard } from './security/auth.guard';
 import { CategoryArticlesComponent } from './pages/category-articles/category-articles.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomePageComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
