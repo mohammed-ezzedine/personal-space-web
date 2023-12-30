@@ -63,10 +63,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
       {
         label: 'Categories',
         icon: 'pi pi-tags',
-        visible: false,
         items: categories.map(c => {
           return { 
-            label: c.name
+            label: c.name,
+            routerLink: 'articles/category/' + c.id
           }
         })
       },

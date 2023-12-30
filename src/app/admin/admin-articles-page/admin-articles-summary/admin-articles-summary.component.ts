@@ -36,7 +36,12 @@ export class AdminArticlesSummaryComponent implements OnInit, OnDestroy {
   }
 
   private fetchArticles() {
-    this.articleService.getArticlesSummary(this.pageIndex, this.pageSize, "createdDate", false).pipe(
+    this.articleService.getArticlesSummary({
+      "page": this.pageIndex,
+      "size": this.pageSize,
+      "sortBy": "createdDate",
+      "ascOrder": false
+    }).pipe(
       takeUntil(this.destroy$),
       concatMap(articles => {
         this.numberOfArticles = articles.totalSize;

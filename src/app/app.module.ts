@@ -29,6 +29,8 @@ import { ToastComponent } from './components/toast/toast.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ArticleContentSkeletonComponent } from './article/article-page/article-content-skeleton/article-content-skeleton.component';
+import { CategoryArticlesComponent } from './pages/category-articles/category-articles.component';
+import { CategoryPipe } from './category/category.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ArticleContentSkeletonComponent } from './article/article-page/article-
     ArticleContentSkeletonComponent,
     HomePageComponent,
     HighlightedArticlesComponent,
-    LatestArticlesComponent
+    LatestArticlesComponent,
+    CategoryArticlesComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import { ArticleContentSkeletonComponent } from './article/article-page/article-
     PaginatorComponent,
     ScrollTopModule,
     SkeletonModule,
+    CategoryPipe,
     OAuthModule.forRoot({
       resourceServer: {
         sendAccessToken: true,

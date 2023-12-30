@@ -47,7 +47,7 @@ export class LatestArticlesComponent implements OnInit, OnDestroy{
 
   private fetchArticles() {
     this.loading = true;
-    this.articleService.getArticlesSummary2({
+    this.articleService.getArticlesSummary({
       'page': this.pageIndex,
       'size': this.pageSize,
       'sortBy': 'createdDate',
@@ -75,14 +75,6 @@ export class LatestArticlesComponent implements OnInit, OnDestroy{
   }
 
   onPageChange($event: PaginatorState) {
-    if($event.page === this.pageIndex) {
-      return;
-    }
-
-    window.scroll({
-      top: 0,
-      behavior: 'smooth'
-    });
     this.pageIndex = $event.page!;
 
     this.fetchArticles();

@@ -9,10 +9,10 @@
         <img class="max-w-10rem max-h-10rem border-round align-self-center" *ngIf="article.thumbnailImageUrl" [src]="article.thumbnailImageUrl" />
     </div>
     <div class="flex flex-row justify-content-between w-full">
-        <span class="flex align-items-center gap-2">
+        <a [routerLink]="['/articles/category', article.categoryId]" class="flex align-items-center gap-2 no-underline text-color">
             <i class="pi pi-tag"></i>
             <span class="font-semibold">{{ article.categoryId | category | async }}</span> 
-        </span>
+        </a>
         <p-button icon="pi pi-link" [text]="true" (onClick)="copyLink()"></p-button>
     </div>
 </div>

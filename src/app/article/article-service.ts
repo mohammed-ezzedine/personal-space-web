@@ -17,29 +17,7 @@ export class ArticleService {
                 @Inject(PLATFORM_ID) private platformId: Object,
                 @Optional() @Inject(SERVER_URL) private serverUrl: string) { }
 
-    getArticlesSummary(page?: number, pageSize?: number, sortBy?: string, ascOrder?: boolean): Observable<Page<ArticleSummary>> {
-        let params : HttpParams = new HttpParams();
-
-        if (page !== undefined) {
-            params = params.set("page", page);
-
-            if (pageSize !== undefined) {
-                params = params.set("size", pageSize);
-            }
-        }
-
-        if (sortBy !== undefined) {
-            params = params.set("sortBy", sortBy);
-
-            if (ascOrder !== undefined) {
-                params = params.set("ascOrder", ascOrder)
-            }
-        }
-
-        return this.http.get<Page<ArticleSummary>>(this.getBaseUrl(), { params: params });
-    }
-
-    getArticlesSummary2(params: { [param: string]: any }): Observable<Page<ArticleSummary>> {
+    getArticlesSummary(params: { [param: string]: any }): Observable<Page<ArticleSummary>> {
         let httpParams : HttpParams = new HttpParams();
         httpParams.appendAll(params)
 
