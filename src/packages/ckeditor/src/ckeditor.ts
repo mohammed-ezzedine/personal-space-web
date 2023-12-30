@@ -70,6 +70,8 @@ import { TextTransformation } from '@ckeditor/ckeditor5-typing';
 import { Undo } from '@ckeditor/ckeditor5-undo';
 import { EditorWatchdog } from '@ckeditor/ckeditor5-watchdog';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
+import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
+import { HtmlEmbed } from '@ckeditor/ckeditor5-html-embed';
 
 class Editor extends ClassicEditor {
 	public static override builtinPlugins = [
@@ -136,7 +138,9 @@ class Editor extends ClassicEditor {
 		TodoList,
 		Underline,
 		Undo,
-		WordCount
+		WordCount,
+		Base64UploadAdapter,
+		HtmlEmbed
 	];
 
 	public static override defaultConfig: EditorConfig = {
@@ -179,7 +183,8 @@ class Editor extends ClassicEditor {
 				'removeFormat',
 				'sourceEditing',
 				'specialCharacters',
-				'style'
+				'style',
+				'htmlEmbed'
 			]
 		},
 		language: 'en',

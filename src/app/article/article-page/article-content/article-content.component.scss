@@ -16,3 +16,11 @@ img {
 p {
    word-break: break-word;
 }
+
+.raw-html-embed {
+   text-align: center;
+
+   iframe {
+      max-width: 100% !important;
+   }
+}
