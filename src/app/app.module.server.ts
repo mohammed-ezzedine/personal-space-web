@@ -11,7 +11,7 @@ import { SERVER_URL } from './tokens';
     ServerModule,
   ],
   providers: [
-    // { provide: SERVER_URL, useValue: 'http://localhost:8080' }
+    // { provide: SERVER_URL, useValue: 'http://localhost:8080/api' }
     { provide: SERVER_URL, useValue: 'http://personal-space-api:8080/api' }
   ],
   bootstrap: [AppComponent],
