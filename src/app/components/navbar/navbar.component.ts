@@ -1,12 +1,14 @@
 import { CommonModule, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TransferState, makeStateKey } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { Subject, takeUntil } from 'rxjs';
 import { Category } from 'src/app/category/category';
-import { CategoryService } from 'src/app/category/category.service';
+import { categories } from 'src/app/category/state/category.selectors';
+import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isAdmin = false;
   items: MenuItem[] | undefined;
 
-  constructor(private categoryService: CategoryService,
+  constructor(private store: Store<AppState>,
               private oauthService: OAuthService,
               private transferState: TransferState,
               @Inject(PLATFORM_ID) private platformId: Object) { }
@@ -40,7 +42,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.categoryService.getCategorySummaries()
+    this.store.select(categories)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: categories => {

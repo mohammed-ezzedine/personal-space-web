@@ -1,9 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { Category } from 'src/app/category/category';
-import { CategoryService } from 'src/app/category/category.service';
+import { categories } from 'src/app/category/state/category.selectors';
+import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-categories-dropdown',
@@ -14,7 +16,7 @@ export class CategoriesDropdownComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject();
 
-  constructor(private categoryService: CategoryService,
+  constructor(private store: Store<AppState>,
               private messageService: MessageService) { }
   
   categoriesSummaries: Category[] = [];
@@ -25,7 +27,7 @@ export class CategoriesDropdownComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadingCategories = true;
-    this.categoryService.getCategorySummaries()
+    this.store.select(categories)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: categories => {

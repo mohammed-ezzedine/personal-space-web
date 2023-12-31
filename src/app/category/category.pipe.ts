@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { CategoryService } from './category.service';
-import { Observable, map } from 'rxjs';
+import { Observable, map, skipWhile } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/app.state';
+import { category } from './state/category.selectors';
 
 @Pipe({
   name: 'category',
@@ -8,10 +11,11 @@ import { Observable, map } from 'rxjs';
 })
 export class CategoryPipe implements PipeTransform {
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private store: Store<AppState>) { }
 
   transform(value: string): Observable<string> {
-    return this.categoryService.getCategoryDetails(value).pipe(
+    return this.store.select(category(value)).pipe(
+      skipWhile(category => !category),
       map(category => category.name)
     )
   }

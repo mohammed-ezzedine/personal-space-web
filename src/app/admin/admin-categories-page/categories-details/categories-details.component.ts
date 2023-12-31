@@ -1,12 +1,16 @@
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TransferState, makeStateKey } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 import { TableRowReorderEvent } from 'primeng/table';
 import { Subject, takeUntil } from 'rxjs';
 import { Category } from 'src/app/category/category';
 import { CategoryOrder } from 'src/app/category/category-order';
 import { CategoryService } from 'src/app/category/category.service';
+import { fetchCategories } from 'src/app/category/state/category.actions';
+import { categories } from 'src/app/category/state/category.selectors';
+import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-categories-details',
@@ -28,7 +32,8 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
   categoryCreationLoading: boolean = false;
   fetchingCategoriesLoading: boolean = false;
 
-  constructor(private categoryService: CategoryService,
+  constructor(private store: Store<AppState>,
+              private categoryService: CategoryService,
               private messageService: MessageService,
               private transferState: TransferState,
               @Inject(PLATFORM_ID) private platformId: Object) { }
@@ -43,7 +48,7 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.fetchingCategoriesLoading = true;
-    this.categoryService.getCategorySummaries()
+    this.store.select(categories)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: categorySummaries => {
@@ -72,7 +77,10 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
     }
     this.categoryService.updateCategoriesOrder(this.categorySummaries.map(c => <CategoryOrder>{ categoryId: c.id, categoryOrder: c.order }))
     .subscribe({
-      next: () => this.showSuccessMessage("Categories orders is updated"),
+      next: () => {
+        this.showSuccessMessage("Categories orders is updated")
+        this.store.dispatch(fetchCategories())
+      },
       error: e => this.showErrorMessage("Failed to update the categories orders")
     })
   }
@@ -92,15 +100,10 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: result => {
-            this.categorySummaries = [...this.categorySummaries, {
-              id: result.id,
-              name: this.categoryCandidateNameInput.value!,
-              order: result.order,
-            }]
-            
             this.showSuccessMessage("Category is created.")
             this.categoryCreationLoading = false;
             this.categoryCandidateNameInput.setValue('')
+            this.store.dispatch(fetchCategories())
           },
           error: e => {
             this.categoryCreationLoading = false;
@@ -117,7 +120,7 @@ export class CategoriesDetailsComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.showSuccessMessage(`Category ${id} was successfully deleted`);
-          this.categorySummaries = this.categorySummaries.filter(c => c.id !== id)
+          this.store.dispatch(fetchCategories())
         },
         error: error => {
           console.error("Failed to delete category with ID", id, error);
