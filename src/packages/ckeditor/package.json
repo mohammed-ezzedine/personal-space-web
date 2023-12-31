@@ -40,7 +40,6 @@
     "@ckeditor/ckeditor5-table": "40.2.0",
     "@ckeditor/ckeditor5-typing": "40.2.0",
     "@ckeditor/ckeditor5-undo": "40.2.0",
-    "@ckeditor/ckeditor5-upload": "^40.2.0",
     "@ckeditor/ckeditor5-watchdog": "40.2.0",
     "@ckeditor/ckeditor5-word-count": "40.2.0"
   },

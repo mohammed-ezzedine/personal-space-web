@@ -26,6 +26,7 @@ import { FontBackgroundColor, FontColor, FontFamily, FontSize } from '@ckeditor/
 import { Heading, Title } from '@ckeditor/ckeditor5-heading';
 import { Highlight } from '@ckeditor/ckeditor5-highlight';
 import { HorizontalLine } from '@ckeditor/ckeditor5-horizontal-line';
+import { HtmlEmbed } from '@ckeditor/ckeditor5-html-embed';
 import { GeneralHtmlSupport } from '@ckeditor/ckeditor5-html-support';
 import {
 	AutoImage,
@@ -68,10 +69,9 @@ import {
 } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
 import { Undo } from '@ckeditor/ckeditor5-undo';
+import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { EditorWatchdog } from '@ckeditor/ckeditor5-watchdog';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
-import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
-import { HtmlEmbed } from '@ckeditor/ckeditor5-html-embed';
 
 class Editor extends ClassicEditor {
 	public static override builtinPlugins = [
@@ -139,7 +139,7 @@ class Editor extends ClassicEditor {
 		Underline,
 		Undo,
 		WordCount,
-		Base64UploadAdapter,
+		SimpleUploadAdapter,
 		HtmlEmbed
 	];
 

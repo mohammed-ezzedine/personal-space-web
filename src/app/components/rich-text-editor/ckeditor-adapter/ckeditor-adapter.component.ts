@@ -1,5 +1,7 @@
 import { Component, Input, Renderer2, afterNextRender } from '@angular/core';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-ckeditor-adapter',
@@ -16,21 +18,32 @@ export class CkeditorAdapterComponent {
   @Input()
   onChange: (value: any) => void = (_value: any) => { };
 
-  constructor(private renderer: Renderer2) {
+  constructor(renderer: Renderer2,
+              oauthService: OAuthService) {
     afterNextRender(() => {
       import('ckeditor-custom-build').then(Editor => {
 
-        let editorElement = this.renderer.createElement("ckeditor")
+        let editorElement = renderer.createElement("ckeditor")
 
-        this.renderer.appendChild(document.getElementById("editor")!, editorElement);
+        renderer.appendChild(document.getElementById("editor")!, editorElement);
 
-        Editor.default.Editor.create(editorElement)
+        Editor.default.Editor.create(editorElement, { 
+          simpleUpload: {
+            uploadUrl: `${environment.serverBaseUrl}/articles/images`,
+            withCredentials: true,
+            headers: {
+              'X-CSRF-TOKEN': 'CSRF-TOKEN',
+              'Authorization': `Bearer ${oauthService.getAccessToken()}`
+            }
+          }
+        })
           .then(editorHtmlElement => {
             editorHtmlElement.model.document.on('change:data', (_event, _data) => {
               this.onChange(editorHtmlElement.getData())
             })
 
             editorHtmlElement.data.set(this.data);
+            
           });
 
       })
