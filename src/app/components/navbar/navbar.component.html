@@ -1,5 +1,6 @@
-<p-menubar [model]="items" styleClass="flex flex-wrap justify-content-center bg-white shadow-1">
+<p-menubar [model]="items" styleClass="flex flex-wrap justify-content-center bg-primary-reverse shadow-1">
     <ng-template pTemplate="end">
         <p-button *ngIf="isAdmin" icon="pi pi-sign-out" [text]="true" (onClick)="logout()"></p-button>
+        <app-theme-toggle></app-theme-toggle>
     </ng-template>
 </p-menubar>

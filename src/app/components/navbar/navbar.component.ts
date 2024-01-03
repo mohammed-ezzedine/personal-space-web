@@ -9,11 +9,12 @@ import { Subject, takeUntil } from 'rxjs';
 import { Category } from 'src/app/category/category';
 import { categories } from 'src/app/category/state/category.selectors';
 import { AppState } from 'src/app/state/app.state';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MenubarModule, ButtonModule, CommonModule],
+  imports: [MenubarModule, ButtonModule, CommonModule, ThemeToggleComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

@@ -1,4 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
 html {
     background-color: var(--surface-50);
+    --text-color: var(--surface-800) !important;
+}
+
+.p-card .p-card-body {
+    padding: 1.25rem;
+}
+
+.p-card {
+    color: var(--text-color)
 }
